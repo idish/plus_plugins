@@ -63,7 +63,7 @@ class Share {
     startActivity(chooserIntent);
   }
 
-  void shareFiles(List<String> paths, List<String> mimeTypes, String text, String subject)
+  void shareFiles(List<String> paths, List<String> mimeTypes, String text, String subject, String packageName)
       throws IOException {
     if (paths == null || paths.isEmpty()) {
       throw new IllegalArgumentException("Non-empty path expected");
@@ -88,6 +88,7 @@ class Share {
     }
     if (text != null) shareIntent.putExtra(Intent.EXTRA_TEXT, text);
     if (subject != null) shareIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+    if (packageName != null) shareIntent.setPackage(packageName);
     shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     Intent chooserIntent = Intent.createChooser(shareIntent, null /* dialog title optional */);
 
@@ -96,11 +97,11 @@ class Share {
             .getPackageManager()
             .queryIntentActivities(chooserIntent, PackageManager.MATCH_DEFAULT_ONLY);
     for (ResolveInfo resolveInfo : resInfoList) {
-      String packageName = resolveInfo.activityInfo.packageName;
+      String resolvedInfoPackageName = resolveInfo.activityInfo.packageName;
       for (Uri fileUri : fileUris) {
         getContext()
             .grantUriPermission(
-                packageName,
+              resolvedInfoPackageName,
                 fileUri,
                 Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
       }

@@ -12,7 +12,8 @@ flutter:
         fileName: share_plus_web.dart
 
 dependencies:
-  share_plus_platform_interface: ^2.0.0
+  share_plus_platform_interface:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_platform_interface
   url_launcher: ^6.0.1
   flutter:
     sdk: flutter

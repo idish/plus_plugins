@@ -48,6 +48,7 @@ class MethodChannelShare extends SharePlatform {
     List<String>? mimeTypes,
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) {
     assert(paths.isNotEmpty);
@@ -60,6 +61,7 @@ class MethodChannelShare extends SharePlatform {
 
     if (subject != null) params['subject'] = subject;
     if (text != null) params['text'] = text;
+    if (packageName != null) params['packageName'] = packageName;
 
     if (sharePositionOrigin != null) {
       params['originX'] = sharePositionOrigin.left;

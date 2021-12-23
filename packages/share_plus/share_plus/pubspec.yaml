@@ -3,6 +3,7 @@ description: Flutter plugin for sharing content via the platform share UI, using
 version: 3.0.4
 homepage: https://plus.fluttercommunity.dev/
 repository: https://github.com/fluttercommunity/plus_plugins/tree/main/packages/
+publish_to: none
 
 flutter:
   plugin:
@@ -26,11 +27,16 @@ dependencies:
   mime: ^1.0.0
   flutter:
     sdk: flutter
-  share_plus_platform_interface: ^2.0.0
-  share_plus_linux: ^2.0.0
-  share_plus_macos: ^2.0.0
-  share_plus_windows: ^2.0.0
-  share_plus_web: ^2.0.0
+  share_plus_platform_interface:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_platform_interface
+  share_plus_linux:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_linux
+  share_plus_macos:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_macos
+  share_plus_windows:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_windows
+  share_plus_web:
+    path: /Users/idan/StudioProjects/plus_plugins/packages/share_plus/share_plus_web
 
 dev_dependencies:
   flutter_test:

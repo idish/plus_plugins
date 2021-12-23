@@ -49,6 +49,7 @@ class SharePlatform extends PlatformInterface {
     List<String>? mimeTypes,
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) {
     return _instance.shareFiles(
@@ -56,6 +57,7 @@ class SharePlatform extends PlatformInterface {
       mimeTypes: mimeTypes,
       subject: subject,
       text: text,
+      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }

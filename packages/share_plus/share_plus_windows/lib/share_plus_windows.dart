@@ -48,7 +48,9 @@ class ShareWindows extends SharePlatform {
     List<String>? mimeTypes,
     String? subject,
     String? text,
-    Rect? sharePositionOrigin,
+        String? packageName,
+
+        Rect? sharePositionOrigin,
   }) {
     throw UnimplementedError(
         'shareFiles() has not been implemented on Windows.');

@@ -67,6 +67,7 @@ class Share {
     List<String>? mimeTypes,
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) {
     assert(paths.isNotEmpty);
@@ -76,6 +77,7 @@ class Share {
       mimeTypes: mimeTypes,
       subject: subject,
       text: text,
+      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }
