@@ -1,3 +1,23 @@
+## 1.4.2
+
+- Web: Resolve package_name
+- Linux: Resolve package_name
+
+## 1.4.1
+
+- Windows: Fix MissingPluginException
+- Linux: Fix MissingPluginException
+
+## 1.4.0
+
+- Android: Migrate to Kotlin
+- Android: Update dependencies, build config updates
+- Android: Fix project title
+
+## 1.3.1
+
+- Fix embedding issue in example
+
 ## 1.3.0
 
 - Removed deprecated embeddingV1 function

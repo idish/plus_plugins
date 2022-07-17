@@ -145,7 +145,8 @@ tests against plugins. For example, to run all e2e tests across all plugins at o
 run the following command from the root of your cloned repository:
 
 ```bash
-melos run test:e2e
+# for mobile testing (Android or iOS)
+melos run test:mobile_e2e
 ```
 
 A full list of all commands can be found within the [`melos.yaml`](https://github.com/fluttercommunity/plus_plugins/blob/main/melos.yaml)
@@ -182,18 +183,24 @@ melos run analyze
 melos run format
 ```
 
-Before opening a Pull-Request, **please increase the build number in the `pubspec.yaml`
+### 5.3 Update version and changelog
+
+Before opening a Pull-Request, **please increase the version number in the `pubspec.yaml`
 and create a new entry in the `CHANGELOG.md` describing the change**.
 This will help us speed-up the release process for the provided fix or feature.
 
-### 5.3 Commit and push your changes
+If updating a platform package (e.g. `device_info_plus_macos`), please remember to update version and changelog of the main package (e.g. `device_info_plus`).
+
+More info about versioning can be found on [semver.org](https://semver.org/).
+
+### 5.4 Commit and push your changes
 
 Assuming all is successful, commit and push your code:
 
 1. `git commit -a -m "<your informative commit message>"`
 2. `git push origin <name_of_your_branch>`
 
-### 5.4 Create a pull request
+### 5.5 Create a pull request
 
 To send us a pull request:
 
@@ -211,7 +218,7 @@ guide. For example, for a fix to the `sensor_plus` plugin:
 Please also enable **“Allow edits by maintainers”**, this will help to speed-up the review
 process as well.
 
-### 5.5 Now be patient :)
+### 5.6 Now be patient :)
 
 Plugins tests are run automatically on contributions using GitHub Actions. Depending on
 your code contributions, various tests will be run against your updated code automatically.

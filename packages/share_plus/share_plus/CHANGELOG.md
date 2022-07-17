@@ -1,3 +1,63 @@
+## 4.0.10
+
+- iOS: Fix 'share text' not showing when share files
+
+## 4.0.9
+
+- iOS: Fix image file names not preserved
+
+## 4.0.8
+
+- iOS: Fix 'Save Image' option not showing
+
+## 4.0.7
+
+- Add documentation iPad
+
+## 4.0.6
+
+- iOS: Fix file names not preserved and poor previews for files
+
+## 4.0.5
+
+- Update dependencies
+- Fix analyzer warnings
+
+## 4.0.4
+
+- iOS: Fix subject not working when sharing raw url or files via email
+
+## 4.0.3
+
+- Android: Revert increased minSdkVersion back to 16
+- Gracefully fall back from `shareWithResult` to regular `share` methods on unsupported platforms
+- Improve documentation for `shareWithResult` methods
+
+## 4.0.2
+
+- Fix type mismatch on Android for some users
+- Set min Flutter to 1.20.0 for all platforms
+- Lower Android minSdkVersion to 22
+
+## 4.0.1
+
+- Hotfix dependencies
+
+## 4.0.0
+
+- iOS, Android, MacOS: Add `shareWithResult` methods to get feedback on user action
+- Android: Increased minSdkVersion to 23
+- MacOS: Native sharing implementation
+
+## 3.1.0
+
+- Android: Migrate to Kotlin
+- Android: Update dependencies, build config updates
+
+## 3.0.5
+
+- Fix example embedding issue
+
 ## 3.0.4
 
 - iOS: Fixed sharing malformed URLs

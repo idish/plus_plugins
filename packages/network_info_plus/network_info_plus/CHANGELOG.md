@@ -1,3 +1,12 @@
+## 2.1.3
+
+- Update nm dependency to be compatible with fresh versions of other Plus plugins
+- Set min Flutter version to 1.20.0 for all platforms
+
+## 2.1.2
+
+- Update Flutter dependencies
+
 ## 2.1.1
 
 - Fix issue with getWifiInterface on iOS. See PR #605 for more info.

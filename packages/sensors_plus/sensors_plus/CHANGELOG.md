@@ -1,3 +1,22 @@
+## 1.3.2
+
+- Fix: Android no longer crashes when app is closed if streams weren't listened to
+- Update flutter_lints to 2.0.1
+- Fix analyzer warnings
+
+## 1.3.1
+
+- Fix: unregister listeners on Android in `onDetachFromEngine` to not receive sensors events after app was killed
+
+## 1.3.0
+
+- Android: Migrate to Kotlin
+- Android: Update dependencies, build config updates
+
+## 1.2.2
+
+- Fix example embedding issues
+
 ## 1.2.1
 
 - Upgrade Android compile SDK version
