@@ -302,7 +302,11 @@ TopViewControllerForViewController(UIViewController *viewController) {
                     toResult:withResult ? result : nil];
           if (!withResult)
             result(nil);
-        } else {
+        }  else if ([@"startActionViewIntent" isEqualToString:call.method]) {
+              NSURL *instagramURL = [NSURL URLWithString:@"instagram://share"];
+              if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+                  [[UIApplication sharedApplication] openURL:instagramURL];
+        }} else {
           result(FlutterMethodNotImplemented);
         }
       }];
