@@ -67,6 +67,7 @@ class SharePlusLinuxPlugin extends SharePlatform {
     List<XFile> files, {
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) {
     throw UnimplementedError(

@@ -124,6 +124,7 @@ class MethodChannelShare extends SharePlatform {
     List<String>? mimeTypes,
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) async {
     assert(paths.isNotEmpty);
@@ -136,6 +137,7 @@ class MethodChannelShare extends SharePlatform {
 
     if (subject != null) params['subject'] = subject;
     if (text != null) params['text'] = text;
+    if (packageName != null) params['packageName'] = packageName;
 
     if (sharePositionOrigin != null) {
       params['originX'] = sharePositionOrigin.left;
@@ -157,6 +159,7 @@ class MethodChannelShare extends SharePlatform {
     List<XFile> files, {
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) async {
     final filesWithPath = await _getFiles(files);
@@ -170,6 +173,7 @@ class MethodChannelShare extends SharePlatform {
       mimeTypes: mimeTypes,
       subject: subject,
       text: text,
+      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }

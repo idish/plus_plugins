@@ -94,7 +94,6 @@ class Share {
       mimeTypes: mimeTypes,
       subject: subject,
       text: text,
-      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }
@@ -190,6 +189,7 @@ class Share {
     List<XFile> files, {
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) async {
     assert(files.isNotEmpty);
@@ -197,6 +197,7 @@ class Share {
       files,
       subject: subject,
       text: text,
+      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }

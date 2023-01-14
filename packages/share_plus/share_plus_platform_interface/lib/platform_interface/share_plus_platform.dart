@@ -97,17 +97,28 @@ class SharePlatform extends PlatformInterface {
     return _resultUnavailable;
   }
 
+  Future<void> startActionViewIntent(
+      String uriString, String packageName) {
+    assert(uriString.isNotEmpty);
+    return _instance.startActionViewIntent(
+      uriString,
+      packageName,
+    );
+  }
+
   /// Share [XFile] objects with Result.
   Future<ShareResult> shareXFiles(
     List<XFile> files, {
     String? subject,
     String? text,
+        String? packageName,
     Rect? sharePositionOrigin,
   }) async {
     return _instance.shareXFiles(
       files,
       subject: subject,
       text: text,
+      packageName: packageName,
       sharePositionOrigin: sharePositionOrigin,
     );
   }
