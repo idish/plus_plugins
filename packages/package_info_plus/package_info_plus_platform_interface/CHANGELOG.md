@@ -1,4 +1,15 @@
+## 2.0.1
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Add information about the installer store (#1135).
+
 ## 1.0.2
+
 - Add `buildSignature` to Android package info to retrieve the signing certifiate SHA1 at runtime.
 
 ## 1.0.1

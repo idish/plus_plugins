@@ -16,10 +16,18 @@
 
 - (void)handleMethodCall:(FlutterMethodCall *)call
                   result:(FlutterResult)result {
-  if ([@"getIosDeviceInfo" isEqualToString:call.method]) {
+  if ([@"getDeviceInfo" isEqualToString:call.method]) {
     UIDevice *device = [UIDevice currentDevice];
     struct utsname un;
     uname(&un);
+
+    NSString *machine;
+    if ([[self isDevicePhysical] isEqualToString:@"true"]) {
+      machine = @(un.machine);
+    } else {
+      machine = [[NSProcessInfo processInfo]
+          environment][@"SIMULATOR_MODEL_IDENTIFIER"];
+    }
 
     result(@{
       @"name" : [device name],
@@ -35,7 +43,7 @@
         @"nodename" : @(un.nodename),
         @"release" : @(un.release),
         @"version" : @(un.version),
-        @"machine" : @(un.machine),
+        @"machine" : machine,
       }
     });
   } else {

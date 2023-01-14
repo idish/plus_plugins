@@ -3,6 +3,7 @@
 [![Flutter Community: sensors_plus](https://fluttercommunity.dev/_github/header/sensors_plus)](https://github.com/fluttercommunity/community)
 
 [![sensors_plus](https://github.com/fluttercommunity/plus_plugins/actions/workflows/sensors_plus.yaml/badge.svg)](https://github.com/fluttercommunity/plus_plugins/actions/workflows/sensors_plus.yaml)
+[![pub points](https://img.shields.io/pub/points/sensors_plus?color=2E8B57&label=pub%20points)](https://pub.dev/packages/sensors_plus/score)
 [![pub package](https://img.shields.io/pub/v/battery_plus.svg)](https://pub.dev/packages/battery_plus)
 
 <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites" target="_blank" rel="noreferrer noopener"><img src="../../../website/static/img/flutter-favorite-badge.png" width="100" alt="build"></a>
@@ -21,20 +22,19 @@ sensors.
 To use this plugin, add `sensors_plus` as a [dependency in your pubspec.yaml
 file](https://plus.fluttercommunity.dev/docs/overview).
 
-This will expose four classes of sensor events through four different
-streams.
+This will expose such classes of sensor events through a set of streams:
 
-- `AccelerometerEvent`s describe the velocity of the device, including the
+- `AccelerometerEvent` describes the velocity of the device, including the
   effects of gravity. Put simply, you can use accelerometer readings to tell if
   the device is moving in a particular direction.
-- `UserAccelerometerEvent`s also describe the velocity of the device, but don't
+- `UserAccelerometerEvent` also describes the velocity of the device, but don't
   include gravity. They can also be thought of as just the user's affect on the
   device.
-- `GyroscopeEvent`s describe the rotation of the device.
-- `MagnetometerEvent`s describe the ambient magnetic field surrounding the
+- `GyroscopeEvent` describes the rotation of the device.
+- `MagnetometerEvent` describes the ambient magnetic field surrounding the
   device. A compass is an example usage of this data.
 
-Each of these is exposed through a `BroadcastStream`: `accelerometerEvents`,
+These events are exposed through a `BroadcastStream`: `accelerometerEvents`,
 `userAccelerometerEvents`, `gyroscopeEvents`, and `magnetometerEvents`,
 respectively.
 

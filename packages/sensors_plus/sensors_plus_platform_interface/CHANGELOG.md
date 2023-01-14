@@ -1,3 +1,11 @@
+## 1.1.3
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 1.1.2
+
+ - **CHORE**: Version tagging using melos.
+
 ## 1.1.1
 
 - Update flutter_lints to 2.0.1

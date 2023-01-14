@@ -1,3 +1,35 @@
+## 3.0.2
+
+ - **FIX**: adds value equality for PackageInfo (#1328).
+
+## 3.0.1
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**: two-package federated architecture (#1236).
+ - **BREAKING** **REFACTOR**: two-package federated architecture (#1228).
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Add information about the installer store (#1135).
+
+## 1.4.3+1
+
+- Add issue_tracker link.
+
+## 1.4.3
+
+- Windows: Updated package_info_plus_windows to version 2.0.0.
+- MacOS: Updated package_info_plus_macos to 1.3.0.
+- Updated test to 1.21.1.
+- Updated flutter_lints to 2.0.1.
+
 ## 1.4.2
 
 - Web: Resolve package_name

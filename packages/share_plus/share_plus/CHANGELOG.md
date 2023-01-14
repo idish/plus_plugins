@@ -1,3 +1,85 @@
+## 6.3.0
+
+ - **FIX**: remove `canLaunch` check (#1315).
+ - **FEAT**: Show destination for share with result in example, update example UI (#1314).
+
+## 6.2.0
+
+ - **FIX**: return correct share result on android (#1301).
+ - **FEAT**: remove direct dependence of url_launcher (#1295).
+ - **DOCS**: #1299 document XFile.fromData (#1300).
+
+## 6.1.0
+
+ - **FIX**: export XFile (#1286).
+ - **FEAT**: share XFile created using File.fromData() (#1284).
+
+## 6.0.1
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 6.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: lint warnings - add missing dependency for tests (#1233).
+ - **FIX**: Show NSSharingServicePicker asynchronously on main thread (#1223).
+ - **BREAKING** **REFACTOR**: two-package federated architecture (#1238).
+
+## 5.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: Native share UI for Windows (#1158).
+
+## 4.5.3
+
+ - **CHORE**: Version tagging using melos.
+
+## 4.5.2
+
+- Update internal dependencies
+
+## 4.5.1
+
+- Update internal dependencies
+
+## 4.5.0
+
+- iOS: Remove usage of deprecated UIApplication.keyWindow in iOS 13+
+- Add `shareXFiles` implementations
+- Deprecate `shareFiles*` implementations
+- Enable `shareXFiles` implementations on Web
+
+## 4.4.0
+
+- Reverted changes in 4.2.0 due to crash issues. See #1081
+
+## 4.3.0
+
+- iOS: Throw PlatformException when iPad share dialog not appearing (sharePositionOrigin not in sourceView)
+
+## 4.2.0
+
+- iOS: Fix Instagram does not show up in provider list for web links
+  - issue #459 appear again
+  - put back NSURL for the shareText, when text is pure URL
+  - using LPMetadataProvider to get LPLinkMetadata make the user experience better
+
+## 4.1.0
+
+- iOS: Fix text sharing.
+  - Previously, the text was being encoded as a URL, this caused the share sheet to appear empty.
+  - Now the shared text is not encoded as a URL anymore but rather shared as plain text.
+  - Sharing text + subject + attachments should work on apps that support that (e.g. Mail app).
+  - Example: Sharing Text + Image on Telegram is possible and both are shared.
+  - Some apps still have limitations with sharing. For example, Gmail app does not support the subject field.
+  - Related issue: #730
+
+## 4.0.10+1
+
+- Add issue_tracker link.
+
 ## 4.0.10
 
 - iOS: Fix 'share text' not showing when share files

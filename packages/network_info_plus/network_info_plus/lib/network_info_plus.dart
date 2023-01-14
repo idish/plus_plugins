@@ -11,6 +11,8 @@ import 'package:network_info_plus_platform_interface/network_info_plus_platform_
 export 'package:network_info_plus_platform_interface/network_info_plus_platform_interface.dart'
     show LocationAuthorizationStatus;
 
+export 'src/network_info_plus_linux.dart';
+
 /// Discover network info: check WI-FI details and more.
 class NetworkInfo {
   /// Constructs a singleton instance of [NetworkInfo].
@@ -128,6 +130,9 @@ class NetworkInfo {
   /// Ideally, a location service authorization should only be requested if the current authorization status is not determined.
   ///
   /// See also [getLocationServiceAuthorization] to obtain current location service status.
+  @Deprecated(
+      'Plugin users should use the permission_handler plugin to request permissions. '
+      'See README.md for more details.')
   Future<LocationAuthorizationStatus> requestLocationServiceAuthorization({
     bool requestAlwaysLocationUsage = false,
   }) {
@@ -172,6 +177,9 @@ class NetworkInfo {
   /// ```
   ///
   /// See also [requestLocationServiceAuthorization] for requesting a location service authorization.
+  @Deprecated(
+      'Plugin users should use the permission_handler plugin to request permissions. '
+      'See README.md for more details.')
   Future<LocationAuthorizationStatus> getLocationServiceAuthorization() {
     return _platform.getLocationServiceAuthorization();
   }

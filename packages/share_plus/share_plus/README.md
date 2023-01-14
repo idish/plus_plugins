@@ -3,6 +3,7 @@
 [![Flutter Community: share_plus](https://fluttercommunity.dev/_github/header/share_plus)](https://github.com/fluttercommunity/community)
 
 [![share_plus](https://github.com/fluttercommunity/plus_plugins/actions/workflows/share_plus.yaml/badge.svg)](https://github.com/fluttercommunity/plus_plugins/actions/workflows/share_plus.yaml)
+[![pub points](https://img.shields.io/pub/points/share_plus?color=2E8B57&label=pub%20points)](https://pub.dev/packages/share_plus/score)
 [![pub package](https://img.shields.io/pub/v/share_plus.svg)](https://pub.dev/packages/share_plus)
 
 <a href="https://flutter.dev/docs/development/packages-and-plugins/favorites" target="_blank" rel="noreferrer noopener"><img src="../../../website/static/img/flutter-favorite-badge.png" width="100" alt="build"></a>
@@ -55,9 +56,30 @@ Share.shareFiles(['${directory.path}/image.jpg'], text: 'Great picture');
 Share.shareFiles(['${directory.path}/image1.jpg', '${directory.path}/image2.jpg']);
 ```
 
+On web you can use `SharePlus.shareXFiles()`. This uses the [Web Share API](https://web.dev/web-share/)
+if it's available. Otherwise it falls back to downloading the shared files.
+See [Can I Use - Web Share API](https://caniuse.com/web-share) to understand
+which browsers are supported. This builds on the [`cross_file`](https://pub.dev/packages/cross_file)
+package.
+
+
+```dart
+Share.shareXFiles([XFile('assets/hello.txt')], text: 'Great picture');
+```
+
 Check out our documentation website to learn more. [Plus plugins documentation](https://plus.fluttercommunity.dev/docs/overview)
 
 ## Known Issues
+
+### Sharing data created with XFile.fromData
+
+When sharing data created with `XFile.fromData`, the plugin will write a temporal file inside the cache directory of the app, so it can be shared.
+
+Althouth the OS should take care of deleting those files, it is advised, that you clean up this data once in a while (e.g. on app start).
+
+You can access this directory using [path_provider](https://pub.dev/packages/path_provider) [getTemporaryDirectory](https://pub.dev/documentation/path_provider/latest/path_provider/getTemporaryDirectory.html).
+
+Alternatively, don't use `XFile.fromData` and instead write the data down to a `File` with a path before sharing it, so you control when to delete it.
 
 ### Mobile platforms (Android and iOS)
 

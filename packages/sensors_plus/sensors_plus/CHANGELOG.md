@@ -1,3 +1,36 @@
+## 2.0.1
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: lint warnings - add missing dependency for tests (#1233).
+ - **DOCS**: Update website docs and README (#1247).
+ - **BREAKING** **REFACTOR**: two-package federated architecture (#1237).
+
+## 1.4.1
+
+ - **CHORE**: Version tagging using melos.
+
+## 1.4.0
+
+- iOS: Corrects magnetometer implementation, returning calibrated values from
+  `DeviceMotion` sensor rather than raw sensor samples
+  
+## 1.3.4+1
+
+- Add issue_tracker link.
+
+## 1.3.4
+
+- Additonal fixes for crash issue: "Error: Sending a message before the FlutterEngine has been run."
+
+## 1.3.3
+
+- Fix: "crash on iOS: Sending a message before the FlutterEngine has been run"
+
 ## 1.3.2
 
 - Fix: Android no longer crashes when app is closed if streams weren't listened to

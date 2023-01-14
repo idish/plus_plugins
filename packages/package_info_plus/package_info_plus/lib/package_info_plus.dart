@@ -7,6 +7,10 @@ import 'dart:async';
 import 'package:flutter/foundation.dart' show visibleForTesting;
 import 'package:package_info_plus_platform_interface/package_info_platform_interface.dart';
 
+export 'src/package_info_plus_linux.dart';
+export 'src/package_info_plus_windows.dart'
+    if (dart.library.html) 'src/package_info_plus_web.dart';
+
 /// Application metadata. Provides application bundle information on iOS and
 /// application package information on Android.
 class PackageInfo {
@@ -22,6 +26,7 @@ class PackageInfo {
     required this.version,
     required this.buildNumber,
     this.buildSignature = '',
+    this.installerStore,
   });
 
   static PackageInfo? _fromPlatform;
@@ -40,6 +45,7 @@ class PackageInfo {
       version: platformData.version,
       buildNumber: platformData.buildNumber,
       buildSignature: platformData.buildSignature,
+      installerStore: platformData.installerStore,
     );
     return _fromPlatform!;
   }
@@ -59,6 +65,9 @@ class PackageInfo {
   /// The build signature. Empty string on iOS, signing key signature (hex) on Android.
   final String buildSignature;
 
+  /// The installer store. Indicates through which store this application was installed.
+  final String? installerStore;
+
   /// Initializes the application metadata with mock values for testing.
   ///
   /// If the singleton instance has been initialized already, it is overwritten.
@@ -69,6 +78,7 @@ class PackageInfo {
     required String version,
     required String buildNumber,
     required String buildSignature,
+    required String? installerStore,
   }) {
     _fromPlatform = PackageInfo(
       appName: appName,
@@ -76,6 +86,35 @@ class PackageInfo {
       version: version,
       buildNumber: buildNumber,
       buildSignature: buildSignature,
+      installerStore: installerStore,
     );
+  }
+
+  /// Overwrite equals for value equality
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PackageInfo &&
+          runtimeType == other.runtimeType &&
+          appName == other.appName &&
+          packageName == other.packageName &&
+          version == other.version &&
+          buildNumber == other.buildNumber &&
+          buildSignature == other.buildSignature &&
+          installerStore == other.installerStore;
+
+  /// Overwrite hashCode for value equality
+  @override
+  int get hashCode =>
+      appName.hashCode ^
+      packageName.hashCode ^
+      version.hashCode ^
+      buildNumber.hashCode ^
+      buildSignature.hashCode ^
+      installerStore.hashCode;
+
+  @override
+  String toString() {
+    return 'PackageInfo(appName: $appName, buildNumber: $buildNumber, packageName: $packageName, version: $version, buildSignature: $buildSignature, installerStore: $installerStore)';
   }
 }

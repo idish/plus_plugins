@@ -1,3 +1,38 @@
+## 3.0.2
+
+ - **FIX**: Add connectivity_plus_web export (#1278).
+
+## 3.0.1
+
+ - **FIX**: Increase min Flutter version to fix dartPluginClass registration (#1275).
+
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**: lint warnings - add missing dependency for tests (#1233).
+ - **BREAKING** **REFACTOR**: two-package federated architecture (#1227).
+
+## 2.3.9
+
+ - **CHORE**: Version tagging using melos.
+
+## 2.3.8
+
+- Discard unused warnings for `ensurePathMonitor` & `ensureReachability` call in iOS.
+
+## 2.3.7
+
+- iOS: Reduce compiler warnings
+
+## 2.3.6+1
+
+- Add issue_tracker link.
+
+## 2.3.6
+
+- Web: Fix Bad state: Stream has already been listened to (#943)
+
 ## 2.3.5
 
 - Stop sending events once flutter engine detached on iOS/macOS (#865)
