@@ -338,6 +338,10 @@ TopViewControllerForViewController(UIViewController *viewController) {
               NSURL *instagramURL = [NSURL URLWithString:@"instagram://share"];
               if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
                   [[UIApplication sharedApplication] openURL:instagramURL];
+        } else {
+          result([FlutterError errorWithCode:@"error"
+                                                   message:@"Instagram not installed"
+                                                   details:nil]);
         }} else {
           result(FlutterMethodNotImplemented);
         }
