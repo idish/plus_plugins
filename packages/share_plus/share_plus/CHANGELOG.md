@@ -1,3 +1,23 @@
+## 7.2.1
+
+ - **CHORE**(share_plus): Update share_plus_platform_interface for compatibility with uuid 4.x
+
+## 7.2.0
+
+> Info: This release is a replacement for release 8.0.0, which was retracted due to issue ([#2251](https://github.com/fluttercommunity/plus_plugins/issues/2251)). As breaking change was reverted the major release was also reverted in favor of this one.
+
+ - **FIX**(share_plus): Change Kotlin version from 1.9.10 to 1.7.22 ([#2252](https://github.com/fluttercommunity/plus_plugins/issues/2252)). ([d4954f36](https://github.com/fluttercommunity/plus_plugins/commit/d4954f36b633e5894cfb4aff4acc995348ce3dca))
+ - **FIX**(share_plus): Revert bump to compileSDK 34 ([#2234](https://github.com/fluttercommunity/plus_plugins/issues/2234)). ([6af2328d](https://github.com/fluttercommunity/plus_plugins/commit/6af2328da997b452758e6c78f3815bcf55ac24aa))
+ - **FEAT**(share_plus): Remove deprecated VALID_ARCHS iOS property ([#2024](https://github.com/fluttercommunity/plus_plugins/issues/2024)). ([bb79888e](https://github.com/fluttercommunity/plus_plugins/commit/bb79888eda6425d8e772bb4bea47f4966610240f))
+ - **DOCS**(share_plus): Fix usage code snippets ([#2106](https://github.com/fluttercommunity/plus_plugins/issues/2106)). ([346e07ea](https://github.com/fluttercommunity/plus_plugins/commit/346e07ea56088321f92530e4334edab0400f4c43))
+
+## 7.1.0
+
+ - **FIX**(share_plus): Regenerate iOS and MacOS example apps ([#1869](https://github.com/fluttercommunity/plus_plugins/issues/1869)). ([5db20ba7](https://github.com/fluttercommunity/plus_plugins/commit/5db20ba7aebd7787a7e56df8e8e6bcb6f832f230))
+ - **FEAT**(share_plus): Allow user to share URI with preview image on the iOS native share sheet ([#1779](https://github.com/fluttercommunity/plus_plugins/issues/1779)). ([c83b667e](https://github.com/fluttercommunity/plus_plugins/commit/c83b667eb12394feef69221eda0eab8716aa19d8))
+ - **DOCS**(share_plus): Updated document with latest available method ([#1917](https://github.com/fluttercommunity/plus_plugins/issues/1917)). ([7fbe3de6](https://github.com/fluttercommunity/plus_plugins/commit/7fbe3de61b874b7d83d66f70c1e2928378707f86))
+ - **DOCS**(all): Fix example links on pub.dev ([#1863](https://github.com/fluttercommunity/plus_plugins/issues/1863)). ([d726035a](https://github.com/fluttercommunity/plus_plugins/commit/d726035ad7631d5a1397d0a2e5df23dc7e30a4f7))
+
 ## 7.0.2
 
 - **CHORE**(share_plus): Update file dependency constraints ([#1853](https://github.com/fluttercommunity/plus_plugins/pull/1853)). ([d8ff0cdb](https://github.com/fluttercommunity/plus_plugins/commit/d8ff0cdb665048c59c8acc5fecd1a9c099ee012f))

@@ -104,9 +104,10 @@ void main() {
             Uri.parse('https://example.com/a/b/c/version.json?cachebuster=1'),
           );
           expect(
+            // 'c' here is to be considered as a page, not a folder
             plugin.versionJsonUrl(
                 'https://example.com/a/b/c?hello_world=true#/my-page', 1),
-            Uri.parse('https://example.com/a/b/c/version.json?cachebuster=1'),
+            Uri.parse('https://example.com/a/b/version.json?cachebuster=1'),
           );
         },
       );
@@ -137,6 +138,16 @@ void main() {
           );
           expect(
             plugin.versionJsonUrl('https://example.com/a/b/c/wrapper.html', 1),
+            Uri.parse('https://example.com/a/b/c/version.json?cachebuster=1'),
+          );
+          expect(
+            plugin.versionJsonUrl(
+                'https://example.com/my-special-file.html', 1),
+            Uri.parse('https://example.com/version.json?cachebuster=1'),
+          );
+          expect(
+            plugin.versionJsonUrl(
+                'https://example.com/a/b/c/my-special-file.html', 1),
             Uri.parse('https://example.com/a/b/c/version.json?cachebuster=1'),
           );
         },

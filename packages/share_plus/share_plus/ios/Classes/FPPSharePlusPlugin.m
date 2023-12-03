@@ -1,8 +1,7 @@
 // Copyright 2019 The Flutter Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-
-#import "FLTSharePlusPlugin.h"
+#import "FPPSharePlusPlugin.h"
 #import "LinkPresentation/LPLinkMetadata.h"
 #import "LinkPresentation/LPMetadataProvider.h"
 
@@ -239,7 +238,7 @@ TopViewControllerForViewController(UIViewController *viewController) {
 
 @end
 
-@implementation FLTSharePlusPlugin
+@implementation FPPSharePlusPlugin
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar> *)registrar {
   FlutterMethodChannel *shareChannel =
@@ -334,10 +333,36 @@ TopViewControllerForViewController(UIViewController *viewController) {
                   withResult:withResult];
           if (!withResult)
             result(nil);
-        }  else if ([@"startActionViewIntent" isEqualToString:call.method]) {
-              NSURL *instagramURL = [NSURL URLWithString:@"instagram://share"];
-              if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
-                  [[UIApplication sharedApplication] openURL:instagramURL];
+        }   else if ([@"startActionViewIntent" isEqualToString:call.method]) {
+                        NSURL *instagramURL = [NSURL URLWithString:@"instagram://share"];
+                        if ([[UIApplication sharedApplication] canOpenURL:instagramURL]) {
+                            [[UIApplication sharedApplication] openURL:instagramURL];
+                  }
+         else if ([@"shareUri" isEqualToString:call.method]) {
+          NSString *uri = arguments[@"uri"];
+
+          if (uri.length == 0) {
+            result([FlutterError errorWithCode:@"error"
+                                       message:@"Non-empty uri expected"
+                                       details:nil]);
+            return;
+          }
+
+          UIViewController *rootViewController = RootViewController();
+          if (!rootViewController) {
+            result([FlutterError errorWithCode:@"error"
+                                       message:@"No root view controller found"
+                                       details:nil]);
+            return;
+          }
+          UIViewController *topViewController =
+              TopViewControllerForViewController(rootViewController);
+
+          [self shareUri:uri
+              withController:topViewController
+                    atSource:originRect
+                    toResult:result
+                  withResult:withResult];
         } else {
           result([FlutterError errorWithCode:@"error"
                                                    message:@"Instagram not installed"
@@ -404,6 +429,20 @@ TopViewControllerForViewController(UIViewController *viewController) {
   [controller presentViewController:activityViewController
                            animated:YES
                          completion:nil];
+}
+
++ (void)shareUri:(NSString *)uri
+    withController:(UIViewController *)controller
+          atSource:(CGRect)origin
+          toResult:(FlutterResult)result
+        withResult:(BOOL)withResult {
+  NSURL *data = [NSURL URLWithString:uri];
+  [self share:@[ data ]
+         withSubject:nil
+      withController:controller
+            atSource:origin
+            toResult:result
+          withResult:withResult];
 }
 
 + (void)shareText:(NSString *)shareText

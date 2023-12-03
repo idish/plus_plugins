@@ -1,3 +1,31 @@
+## 5.0.1
+
+> Note: This release has breaking changes. There is a new state for battery available on Android, MacOS and Linux platforms.
+> Also, MacOS implementation was updated to provide more accurate battery status. Be sure to test if it affects your MacOS app.
+
+ - **BREAKING** **FIX**(battery_plus): Implement not_charging battery state ([#2275](https://github.com/fluttercommunity/plus_plugins/issues/2275)). ([6595e035](https://github.com/fluttercommunity/plus_plugins/commit/6595e035fd113b4a75651c9d471cc098d5798de3))
+ - **BREAKING** **FEAT**(battery_plus): Introduce connected_not_charging state on MacOS ([#2399](https://github.com/fluttercommunity/plus_plugins/issues/2399)). ([78f44bf4](https://github.com/fluttercommunity/plus_plugins/commit/78f44bf41a7e8349240bacae2dd70598ba22e97a))
+ - **BREAKING** **FEAT**(battery_plus): Introduce not_charging state on Linux ([#2400](https://github.com/fluttercommunity/plus_plugins/issues/2400)). ([42ef02bd](https://github.com/fluttercommunity/plus_plugins/commit/42ef02bd6de219fef1b2d9db2eebe9775a6ac751))
+ - **DOCS**(battery_plus): Improve documentation on battery states ([#2402](https://github.com/fluttercommunity/plus_plugins/issues/2402)). ([baeb886f](https://github.com/fluttercommunity/plus_plugins/commit/baeb886fcc587f72662ce177ab4922496bb1db46))
+ - **BREAKING** **FIX**(battery_plus): Bump iOS min target to 12 and update example app ([#2401](https://github.com/fluttercommunity/plus_plugins/issues/2401)). ([25ef7928](https://github.com/fluttercommunity/plus_plugins/commit/25ef7928cd57ca17d6107ed839711ea166d451a6))
+
+## 5.0.0
+
+This release was retracted due to due to ([#2251](https://github.com/fluttercommunity/plus_plugins/issues/2251)).
+
+## 4.1.0
+
+> Info: This release is a replacement for release 5.0.0, which was retracted due to issue ([#2251](https://github.com/fluttercommunity/plus_plugins/issues/2251)). As breaking change was reverted the major release was also reverted in favor of this one.
+
+ - **FIX**(battery_plus): Change Kotlin version from 1.9.10 to 1.7.22 ([#2257](https://github.com/fluttercommunity/plus_plugins/issues/2257)). ([f5244e36](https://github.com/fluttercommunity/plus_plugins/commit/f5244e368c74d8b6e7bdd0062a4a2250dcabe540))
+ - **FIX**(battery_plus): Revert bump of compileSDK to 34 ([#2228](https://github.com/fluttercommunity/plus_plugins/issues/2228)). ([e834f582](https://github.com/fluttercommunity/plus_plugins/commit/e834f582b85d5fb5a18aefc49b11b039ae600c78))
+ - **FEAT**(battery_plus): Remove deprecated VALID_ARCHS iOS property ([#2025](https://github.com/fluttercommunity/plus_plugins/issues/2025)). ([09318317](https://github.com/fluttercommunity/plus_plugins/commit/0931831758dfc829e5649d880a616840a9b1d21f))
+
+## 4.0.2
+
+ - **FIX**(battery_plus): Regenerate iOS and MacOS example apps ([#1873](https://github.com/fluttercommunity/plus_plugins/issues/1873)). ([18deeff3](https://github.com/fluttercommunity/plus_plugins/commit/18deeff3c68f312e2dae0de80273e1991ef97f45))
+ - **DOCS**(all): Fix example links on pub.dev ([#1863](https://github.com/fluttercommunity/plus_plugins/issues/1863)). ([d726035a](https://github.com/fluttercommunity/plus_plugins/commit/d726035ad7631d5a1397d0a2e5df23dc7e30a4f7))
+
 ## 4.0.1
 
  - **FIX**(battery_plus): Use ContextCompat on Android to register broadcast receiver ([#1811](https://github.com/fluttercommunity/plus_plugins/issues/1811)). ([b901615c](https://github.com/fluttercommunity/plus_plugins/commit/b901615cdc12d4bc5140ba9713d16f5a85fa6198))
