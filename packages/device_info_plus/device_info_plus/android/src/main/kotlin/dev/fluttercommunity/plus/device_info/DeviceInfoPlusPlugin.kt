@@ -1,8 +1,8 @@
 package dev.fluttercommunity.plus.device_info
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.view.WindowManager
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
@@ -23,8 +23,10 @@ class DeviceInfoPlusPlugin : FlutterPlugin {
     private fun setupMethodChannel(messenger: BinaryMessenger, context: Context) {
         methodChannel = MethodChannel(messenger, "dev.fluttercommunity.plus/device_info")
         val packageManager: PackageManager = context.packageManager
-        val windowManager: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val handler = MethodCallHandlerImpl(packageManager, windowManager)
+        val activityManager: ActivityManager =
+            context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val contentResolver = context.contentResolver
+        val handler = MethodCallHandlerImpl(packageManager, activityManager, contentResolver)
         methodChannel.setMethodCallHandler(handler)
     }
 }

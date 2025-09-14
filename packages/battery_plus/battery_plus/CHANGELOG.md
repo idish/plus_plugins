@@ -1,3 +1,86 @@
+## 7.0.0
+
+> Note: This release has breaking changes.
+>
+> On Android plugin now requires the following:
+> - Android Gradle Plugin >=8.12.1
+> - Gradle wrapper >=8.13
+> - Kotlin 2.2.0
+
+ - **DOCS**(all): replace MacOS by macOS in package READMEs ([#3658](https://github.com/fluttercommunity/plus_plugins/issues/3658)). ([72b6234c](https://github.com/fluttercommunity/plus_plugins/commit/72b6234c25315c30d8efc9f15a9258b0bb7273a8))
+ - **BREAKING** **FEAT**(battery_plus): Change Android compile SDK, update Android build config ([#3666](https://github.com/fluttercommunity/plus_plugins/issues/3666)). ([c2fe29ab](https://github.com/fluttercommunity/plus_plugins/commit/c2fe29ab224d1fca33905fe57110aee106da55e4))
+
+## 6.2.3
+
+ - **FIX**(battery_plus): Do not call hidden flag on Samsung with Android versions >= 12 ([#3641](https://github.com/fluttercommunity/plus_plugins/issues/3641)). ([a8764705](https://github.com/fluttercommunity/plus_plugins/commit/a87647056529ef88d319d9a27c75744c9db9ff53))
+ - **FIX**(battery_plus): batteryMonitoringEnabled should be set false when cancel on iOS ([#3634](https://github.com/fluttercommunity/plus_plugins/issues/3634)). ([9597aab6](https://github.com/fluttercommunity/plus_plugins/commit/9597aab680cc8d9768bca9e491705c60ad302b34))
+
+## 6.2.2
+
+ - **FIX**(battery_plus): Improve battery save mode check on Xiaomi devices ([#3555](https://github.com/fluttercommunity/plus_plugins/issues/3555)). ([32ba69ba](https://github.com/fluttercommunity/plus_plugins/commit/32ba69bafc6cc787eeb8e9df58eb572d22f4d42d))
+
+## 6.2.1
+
+ - **REFACTOR**(all): Use range of flutter_lints for broader compatibility ([#3371](https://github.com/fluttercommunity/plus_plugins/issues/3371)). ([8a303add](https://github.com/fluttercommunity/plus_plugins/commit/8a303add3dee1acb8bac5838246490ed8a0fe408))
+ - **FIX**(battery_plus): Incorrect minimum version configuration. ([#3364](https://github.com/fluttercommunity/plus_plugins/issues/3364)). ([56fc9847](https://github.com/fluttercommunity/plus_plugins/commit/56fc98473d29f97ed4a014b85585d06d2356fd9e))
+
+## 6.2.0
+
+ - **FEAT**(battery_plus): Add battery save mode check on MacOS ([#3332](https://github.com/fluttercommunity/plus_plugins/issues/3332)). ([0e8c9223](https://github.com/fluttercommunity/plus_plugins/commit/0e8c9223f00f801abeb203c25a79b8f19259a11c))
+
+## 6.1.0
+
+ - **FEAT**(battery_plus): Add Swift Package Manager support ([#3154](https://github.com/fluttercommunity/plus_plugins/issues/3154)). ([cba3279a](https://github.com/fluttercommunity/plus_plugins/commit/cba3279abf0faaa0b62323af0a33e118186b30fc))
+
+## 6.0.4
+
+ - **FIX**(all): Clean up macOS Privacy Manifests ([#3268](https://github.com/fluttercommunity/plus_plugins/issues/3268)). ([d7b98ebd](https://github.com/fluttercommunity/plus_plugins/commit/d7b98ebd7d39b0143931f5cc6e627187576223dc))
+ - **FIX**(all): Add macOS Privacy Manifests ([#3251](https://github.com/fluttercommunity/plus_plugins/issues/3251)). ([bf5dad2a](https://github.com/fluttercommunity/plus_plugins/commit/bf5dad2ad249605055bcbd5f663e42569df12d64))
+
+## 6.0.3
+
+ - **CHORE**(battery_plus): Update to package:web to ^1.0.0 ([#3103](https://github.com/fluttercommunity/plus_plugins/pull/3103)). ([cf534eec](https://github.com/fluttercommunity/plus_plugins/commit/cf534eec402b57b70ffe96bf5351afcdfa8c7c7e))
+ - **FIX**(battery_plus): Fix type conversion ([#3159](https://github.com/fluttercommunity/plus_plugins/issues/3159)). ([1145af14](https://github.com/fluttercommunity/plus_plugins/commit/1145af14298ecab7d7be57bfa9a32c628b9acdf3))
+ - **FIX**(battery_plus): Fix crash when retrieving battery level on desktop Mac. ([#3155](https://github.com/fluttercommunity/plus_plugins/issues/3155)). ([36e7dd16](https://github.com/fluttercommunity/plus_plugins/commit/36e7dd16de3ac43d83eeece7e682b265c93f2fbe))
+ - **DOCS**(battery_plus): Update plugin requirements ([#3158](https://github.com/fluttercommunity/plus_plugins/issues/3158)). ([c0353107](https://github.com/fluttercommunity/plus_plugins/commit/c0353107f17e5e32ca33e44742343ccd2c391a0c))
+
+## 6.0.2
+
+ - **REFACTOR**(all): Remove website files, configs, mentions ([#3018](https://github.com/fluttercommunity/plus_plugins/issues/3018)). ([ecc57146](https://github.com/fluttercommunity/plus_plugins/commit/ecc57146aa8c6b1c9c332169d3cc2205bc4a700f))
+ - **FIX**(all): changed homepage url in pubspec.yaml ([#3099](https://github.com/fluttercommunity/plus_plugins/issues/3099)). ([66613656](https://github.com/fluttercommunity/plus_plugins/commit/66613656a85c176ba2ad337e4d4943d1f4171129))
+
+## 6.0.1
+
+ - **REFACTOR**(battery_plus): Migrate Android example to use the new plugins declaration ([#2772](https://github.com/fluttercommunity/plus_plugins/issues/2772)). ([740a5df2](https://github.com/fluttercommunity/plus_plugins/commit/740a5df21fb84df2b88cea822d53302ce61a6dc2))
+ - **FIX**(battery_plus): Fix return value of getBattery to be nullable ([#2745](https://github.com/fluttercommunity/plus_plugins/issues/2745)). ([4d5b950e](https://github.com/fluttercommunity/plus_plugins/commit/4d5b950ed1c74f801f621ef0c07b44f496a7465b))
+
+## 6.0.0
+
+> Note: This release has breaking changes.
+
+In this release plugin migrated to package:web, meaning that it now supports WASM!
+
+Plugin now requires the following:
+- Flutter >=3.19.0
+- Dart >=3.3.0
+- compileSDK 34 for Android part
+- Java 17 for Android part
+- Gradle 8.4 for Android part
+
+- **BREAKING** **FEAT**(battery_plus): Migrate to package:web ([#2720](https://github.com/fluttercommunity/plus_plugins/issues/2720)). ([21ccfa45](https://github.com/fluttercommunity/plus_plugins/commit/21ccfa459fcfb0609da46299fed6e10c9e77332b))
+- **BREAKING** **BUILD**(battery_plus): Target Java 17 on Android ([#2727](https://github.com/fluttercommunity/plus_plugins/issues/2727)). ([ca2c35ab](https://github.com/fluttercommunity/plus_plugins/commit/ca2c35abc464b26e741ace6e53e319dfa674b630))
+- **BREAKING** **BUILD**(battery_plus): Update to target and compile SDK 34 ([#2702](https://github.com/fluttercommunity/plus_plugins/pull/2702)). ([fc59745](https://github.com/fluttercommunity/plus_plugins/commit/fc59745d0a8650cc32f6e4d949887c4cdbffe547))
+- **BREAKING** **REFACTOR**(battery_plus): bump MACOSX_DEPLOYMENT_TARGET from 10.11 to 10.14 ([#2592](https://github.com/fluttercommunity/plus_plugins/issues/2592)). ([fe07964b](https://github.com/fluttercommunity/plus_plugins/commit/fe07964b03997db73f22f3c30b7d09ea2c0adc93))
+ - **FIX**(battery_plus): Add iOS Privacy Info ([#2580](https://github.com/fluttercommunity/plus_plugins/issues/2580)). ([9f36a001](https://github.com/fluttercommunity/plus_plugins/commit/9f36a0018daa08e3f3ebb59cebcd4149fae7c4bc))
+
+## 5.0.3
+
+ - **FIX**(battery_plus): battery state always unknown on iOS ([#2481](https://github.com/fluttercommunity/plus_plugins/issues/2481)). ([ea892fb9](https://github.com/fluttercommunity/plus_plugins/commit/ea892fb96d06dcd685fa7953a468c377cc133ecc))
+
+## 5.0.2
+
+ - **FIX**(battery_plus): Return correct state enum value on Android for not charging state ([#2451](https://github.com/fluttercommunity/plus_plugins/issues/2451)). ([68ddda39](https://github.com/fluttercommunity/plus_plugins/commit/68ddda39f0fa8e7ac950c13721403d49d0d97a65))
+
 ## 5.0.1
 
 > Note: This release has breaking changes. There is a new state for battery available on Android, MacOS and Linux platforms.

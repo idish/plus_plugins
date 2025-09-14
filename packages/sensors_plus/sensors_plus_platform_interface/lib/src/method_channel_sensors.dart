@@ -25,11 +25,15 @@ class MethodChannelSensors extends SensorsPlatform {
   static const EventChannel _magnetometerEventChannel =
       EventChannel('dev.fluttercommunity.plus/sensors/magnetometer');
 
+  static const EventChannel _barometerEventChannel =
+      EventChannel('dev.fluttercommunity.plus/sensors/barometer');
+
   final logger = Logger('MethodChannelSensors');
   Stream<AccelerometerEvent>? _accelerometerEvents;
   Stream<GyroscopeEvent>? _gyroscopeEvents;
   Stream<UserAccelerometerEvent>? _userAccelerometerEvents;
   Stream<MagnetometerEvent>? _magnetometerEvents;
+  Stream<BarometerEvent>? _barometerEvents;
 
   /// Returns a broadcast stream of events from the device accelerometer at the
   /// given sampling frequency.
@@ -52,7 +56,12 @@ class MethodChannelSensors extends SensorsPlatform {
         .receiveBroadcastStream()
         .map((dynamic event) {
       final list = event.cast<double>();
-      return AccelerometerEvent(list[0]!, list[1]!, list[2]!);
+      return AccelerometerEvent(
+        list[0]!,
+        list[1]!,
+        list[2]!,
+        DateTime.fromMicrosecondsSinceEpoch(list[3]!.toInt()),
+      );
     });
     return _accelerometerEvents!;
   }
@@ -77,7 +86,12 @@ class MethodChannelSensors extends SensorsPlatform {
     _gyroscopeEvents ??=
         _gyroscopeEventChannel.receiveBroadcastStream().map((dynamic event) {
       final list = event.cast<double>();
-      return GyroscopeEvent(list[0]!, list[1]!, list[2]!);
+      return GyroscopeEvent(
+        list[0]!,
+        list[1]!,
+        list[2]!,
+        DateTime.fromMicrosecondsSinceEpoch(list[3]!.toInt()),
+      );
     });
     return _gyroscopeEvents!;
   }
@@ -104,7 +118,12 @@ class MethodChannelSensors extends SensorsPlatform {
         .receiveBroadcastStream()
         .map((dynamic event) {
       final list = event.cast<double>();
-      return UserAccelerometerEvent(list[0]!, list[1]!, list[2]!);
+      return UserAccelerometerEvent(
+        list[0]!,
+        list[1]!,
+        list[2]!,
+        DateTime.fromMicrosecondsSinceEpoch(list[3]!.toInt()),
+      );
     });
     return _userAccelerometerEvents!;
   }
@@ -129,8 +148,41 @@ class MethodChannelSensors extends SensorsPlatform {
     _magnetometerEvents ??=
         _magnetometerEventChannel.receiveBroadcastStream().map((dynamic event) {
       final list = event.cast<double>();
-      return MagnetometerEvent(list[0]!, list[1]!, list[2]!);
+      return MagnetometerEvent(
+        list[0]!,
+        list[1]!,
+        list[2]!,
+        DateTime.fromMicrosecondsSinceEpoch(list[3]!.toInt()),
+      );
     });
     return _magnetometerEvents!;
+  }
+
+  /// Returns a broadcast stream of events from the device barometer at the
+  /// given sampling frequency.
+  @override
+  Stream<BarometerEvent> barometerEventStream({
+    Duration samplingPeriod = SensorInterval.normalInterval,
+  }) {
+    var microseconds = samplingPeriod.inMicroseconds;
+    if (microseconds >= 1 && microseconds <= 3) {
+      logger.warning('The SamplingPeriod is currently set to $microsecondsμs, '
+          'which is a reserved value in Android. Please consider changing it '
+          'to either 0 or 4μs. See https://developer.android.com/reference/'
+          'android/hardware/SensorManager#registerListener(android.hardware.'
+          'SensorEventListener,%20android.hardware.Sensor,%20int) for more '
+          'information');
+      microseconds = 0;
+    }
+    _methodChannel.invokeMethod('setBarometerSamplingPeriod', microseconds);
+    _barometerEvents ??=
+        _barometerEventChannel.receiveBroadcastStream().map((dynamic event) {
+      final list = event.cast<double>();
+      return BarometerEvent(
+        list[0]!,
+        DateTime.fromMicrosecondsSinceEpoch(list[1]!.toInt()),
+      );
+    });
+    return _barometerEvents!;
   }
 }

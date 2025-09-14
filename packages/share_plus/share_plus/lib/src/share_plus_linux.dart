@@ -1,7 +1,5 @@
 /// The Linux implementation of `share_plus`.
-library share_plus_linux;
-
-import 'dart:ui';
+library;
 
 import 'package:share_plus_platform_interface/share_plus_platform_interface.dart';
 import 'package:url_launcher_linux/url_launcher_linux.dart';
@@ -18,16 +16,16 @@ class SharePlusLinuxPlugin extends SharePlatform {
     SharePlatform.instance = SharePlusLinuxPlugin(UrlLauncherLinux());
   }
 
-  /// Share text.
   @override
-  Future<void> share(
-    String text, {
-    String? subject,
-    Rect? sharePositionOrigin,
-  }) async {
+  Future<ShareResult> share(ShareParams params) async {
+    if (params.files?.isNotEmpty == true) {
+      throw UnimplementedError('Sharing files not supported on Linux');
+    }
+
     final queryParameters = {
-      if (subject != null) 'subject': subject,
-      'body': text,
+      if (params.subject != null) 'subject': params.subject,
+      if (params.uri != null) 'body': params.uri.toString(),
+      if (params.text != null) 'body': params.text,
     };
 
     // see https://github.com/dart-lang/sdk/issues/43838#issuecomment-823551891
@@ -35,7 +33,7 @@ class SharePlusLinuxPlugin extends SharePlatform {
       scheme: 'mailto',
       query: queryParameters.entries
           .map((e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value ?? '')}')
           .join('&'),
     );
 
@@ -46,32 +44,7 @@ class SharePlusLinuxPlugin extends SharePlatform {
     if (!launchResult) {
       throw Exception('Failed to launch $uri');
     }
-  }
 
-  /// Share files.
-  @override
-  Future<void> shareFiles(
-    List<String> paths, {
-    List<String>? mimeTypes,
-    String? subject,
-    String? text,
-        String? packageName,
-        Rect? sharePositionOrigin,
-  }) {
-    throw UnimplementedError('shareFiles() has not been implemented on Linux.');
-  }
-
-  /// Share [XFile] objects with Result.
-  @override
-  Future<ShareResult> shareXFiles(
-    List<XFile> files, {
-    String? subject,
-    String? text,
-        String? packageName,
-    Rect? sharePositionOrigin,
-  }) {
-    throw UnimplementedError(
-      'shareXFiles() has not been implemented on Linux.',
-    );
+    return ShareResult.unavailable;
   }
 }

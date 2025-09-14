@@ -137,8 +137,8 @@ class AndroidAlarmManager {
   /// If `exact` is passed as `true`, the timer will be created with Android's
   /// `AlarmManagerCompat.setExact`. When `exact` is `false` (the default), the
   /// timer will be created with `AlarmManager.set`.
-  /// For apps with `targetSDK=31` before scheduling an exact alarm a check for
-  /// `SCHEDULE_EXACT_ALARM` permission is required. Otherwise, an exeption will
+  /// For apps with `targetSDK=31` and newer before scheduling an exact alarm a check for
+  /// `SCHEDULE_EXACT_ALARM` permission is required. Otherwise, an exception will
   /// be thrown and alarm won't schedule.
   ///
   /// If `wakeup` is passed as `true`, the device will be woken up when the
@@ -151,7 +151,7 @@ class AndroidAlarmManager {
   ///
   /// You can send extra data via `params`.
   /// For receiving extra data, a `callback` needs to be implemented:
-  /// Function(int, Map<String,dynamic>)
+  /// `Function(int, Map<String,dynamic>)`
   /// The params map must be parsable to Json.
   /// If one of the values can not be converted to Json,
   /// an UnsupportedError will be thrown.
@@ -207,7 +207,7 @@ class AndroidAlarmManager {
   /// If `exact` is passed as `true`, the timer will be created with Android's
   /// `AlarmManagerCompat.setExact`. When `exact` is `false` (the default), the
   /// timer will be created with `AlarmManager.set`.
-  /// For apps with `targetSDK=31` before scheduling an exact alarm a check for
+  /// For apps with `targetSDK=31` and newer before scheduling an exact alarm a check for
   /// `SCHEDULE_EXACT_ALARM` permission is required. Otherwise, an exception
   /// will be thrown and alarm won't schedule.
   ///
@@ -221,7 +221,7 @@ class AndroidAlarmManager {
   ///
   /// You can send extra data via `params`.
   /// For receiving extra data, a `callback` needs to be implemented:
-  /// Function(int, Map<String,dynamic>)
+  /// `Function(int, Map<String,dynamic>)`
   /// The params map must be parsable to Json.
   /// If one of the values can not be converted to Json,
   /// an UnsupportedError will be thrown.
@@ -290,8 +290,8 @@ class AndroidAlarmManager {
   /// If `exact` is passed as `true`, the timer will be created with Android's
   /// `AlarmManager.setRepeating`. When `exact` is `false` (the default), the
   /// timer will be created with `AlarmManager.setInexactRepeating`.
-  /// For apps with `targetSDK=31` before scheduling an exact alarm a check for
-  /// `SCHEDULE_EXACT_ALARM` permission is required. Otherwise, an exeption will
+  /// For apps with `targetSDK=31` and newer before scheduling an exact alarm a check for
+  /// `SCHEDULE_EXACT_ALARM` permission is required. Otherwise, an exception will
   /// be thrown and alarm won't schedule.
   ///
   /// If `wakeup` is passed as `true`, the device will be woken up when the
@@ -304,7 +304,7 @@ class AndroidAlarmManager {
   ///
   /// You can send extra data via `params`.
   /// For receiving extra data, a `callback` needs to be implemented:
-  /// Function(int, Map<String,dynamic>)
+  /// `Function(int, Map<String,dynamic>)`
   /// The params map must be parsable to Json.
   /// If one of the values can not be converted to Json,
   /// an UnsupportedError will be thrown.

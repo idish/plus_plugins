@@ -22,14 +22,34 @@ env:
   PLUGIN_EXAMPLE_SCOPE: "*battery_plus_example*"
 
 jobs:
+  analyze:
+    name: "Dart Analyzer"
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
+      - name: "Install Tools"
+        run: |
+          ./.github/workflows/scripts/install-tools.sh
+      - name: "Bootstrap Workspace"
+        run: melos bootstrap
+      - name: "Run Dart Analyze"
+        uses: invertase/github-action-dart-analyzer@v3
+        with:
+          fatal-infos: false
+          fatal-warnings: true
+          annotate: true
+          working-directory: ./packages/battery_plus
+
   android_example_build:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
 
@@ -37,17 +57,18 @@ jobs:
         run: ./.github/workflows/scripts/build-examples.sh android ./lib/main.dart
 
   android_integration_test:
+    # Use non M1 machine till https://github.com/ReactiveCircus/android-emulator-runner/issues/350 is resolved
     runs-on: macos-13
     timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
-        android-api-level: [ 22, 26, 31 ]
+        android-api-level: [ 22, 26, 31, 34 ]
 
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
 
@@ -65,45 +86,42 @@ jobs:
           script: ./.github/workflows/scripts/integration-test.sh android battery_plus_example
 
   ios_example_build:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
         run: ./.github/workflows/scripts/build-examples.sh ios ./lib/main.dart
 
   ios_integration_test:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Bootstrap Workspace"
         run: melos bootstrap --scope="$PLUGIN_SCOPE"
       - name: "Start Simulator"
-        uses: futureware-tech/simulator-action@v3
+        uses: futureware-tech/simulator-action@v4
         with:
-          model: "iPhone 14"
+          model: "iPhone 15"
       - name: "Run Integration Test"
         run: ./.github/workflows/scripts/integration-test.sh ios battery_plus_example
 
   macos_example_build:
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
@@ -111,13 +129,12 @@ jobs:
 
   macos_integration_test:
     if: false # Disabled as battery_plus APIs don't complete in github actions macos VMs.
-    runs-on: macos-13
+    runs-on: macos-14
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Bootstrap Workspace"
@@ -130,9 +147,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Install UPower"
@@ -145,9 +161,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Install UPower"
@@ -162,9 +177,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"
@@ -175,9 +189,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Bootstrap Workspace"
@@ -190,9 +203,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - name: "Checkout repository"
-        uses: actions/checkout@v4
-      - name: "Install Flutter"
-        run: ./.github/workflows/scripts/install-flutter.sh stable
+        uses: actions/checkout@v5
+      - uses: flutter-actions/setup-flutter@v4
       - name: "Install Tools"
         run: ./.github/workflows/scripts/install-tools.sh
       - name: "Build Example"

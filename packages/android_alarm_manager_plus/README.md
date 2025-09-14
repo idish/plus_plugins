@@ -1,12 +1,10 @@
 # android_alarm_manager_plus
 
-[![Flutter Community: android_alarm_manager_plus](https://fluttercommunity.dev/_github/header/android_alarm_manager_plus)](https://github.com/fluttercommunity/community)
-
 [![pub package](https://img.shields.io/pub/v/android_alarm_manager_plus.svg)](https://pub.dev/packages/android_alarm_manager_plus)
 [![pub points](https://img.shields.io/pub/points/android_alarm_manager_plus?color=2E8B57&label=pub%20points)](https://pub.dev/packages/android_alarm_manager_plus/score)
 [![android_alarm_manager_plus](https://github.com/fluttercommunity/plus_plugins/actions/workflows/android_alarm_manager_plus.yaml/badge.svg)](https://github.com/fluttercommunity/plus_plugins/actions/workflows/android_alarm_manager_plus.yaml)
 
-<center><a href="https://flutter.dev/docs/development/packages-and-plugins/favorites" target="_blank" rel="noreferrer noopener"><img src="../../website/static/img/flutter-favorite-badge.png" width="100" alt="build"></a></center>
+[<img src="../../assets/flutter-favorite-badge.png" width="100" />](https://flutter.dev/docs/development/packages-and-plugins/favorites)
 
 A Flutter plugin for accessing the Android AlarmManager service, and running
 Dart code in the background when alarms fire.
@@ -17,7 +15,23 @@ Dart code in the background when alarms fire.
 | :-----: |
 |   ✅    |
 
+## Requirements
+
+- Flutter >=3.12.0
+- Dart >=3.1.0 <4.0.0
+- Java 17
+- Kotlin 2.2.0
+- Android Gradle Plugin >=8.12.1
+- Gradle wrapper >=8.13
+
 ## Getting Started
+
+> [!IMPORTANT]
+> You would also need a plugin to request [SCHEDULE_EXACT_ALARM](https://developer.android.com/reference/android/Manifest.permission#SCHEDULE_EXACT_ALARM) permission if your app targets Android 14 and newer.
+> Google introduced SCHEDULE_EXACT_ALARM permission in [Android 12](https://developer.android.com/about/versions/12/behavior-changes-12#exact-alarm-permission). In Android 13 it was granted by default.
+> Since Android 14 this permission [is denied by default](https://developer.android.com/about/versions/14/changes/schedule-exact-alarms) and apps need to ask user to provide it.
+> `android_alarm_manager_plus` does not provide a way to work with this permission, so be sure to handle such logic yourself.
+> To do so you would need an additional plugin, like [`permission_handler`](https://pub.dev/packages/permission_handler).
 
 After importing this plugin to your project as usual, add the following to your
 `AndroidManifest.xml` within the `<manifest></manifest>` tags:
@@ -25,7 +39,7 @@ After importing this plugin to your project as usual, add the following to your
 ```xml
 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 <uses-permission android:name="android.permission.WAKE_LOCK"/>
-<!-- For apps with targetSDK=31 (Android 12) -->
+<!-- For apps with targetSDK 31 (Android 12) and newer -->
 <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
 ```
 
@@ -86,6 +100,56 @@ alarm manager plugin itself, it may be necessary to inform the background servic
 to initialize plugins depending on which Flutter Android embedding the application is
 using.
 
+## Receiving show intents for alarm clocks
+
+If your app is an alarm clock app and sets alarms using the `alarmClock` argument in [`oneShot`](https://pub.dev/documentation/android_alarm_manager_plus/latest/android_alarm_manager_plus/AndroidAlarmManager/oneShot.html) or [`oneShotAt`](https://pub.dev/documentation/android_alarm_manager_plus/latest/android_alarm_manager_plus/AndroidAlarmManager/oneShotAt.html), you can receive [intents](https://developer.android.com/reference/android/content/Intent) when user interacts with system UI that shows the next alarm. An example is the alarm tile in Android [quick-setting tiles](https://developer.android.com/develop/ui/views/quicksettings-tiles). This functionality is to allow you to show users the relevant alarm, or allow them to edit it when they tap on such UIs.
+
+This intent has the action `android.intent.action.MAIN` and includes the following `extras`:
+- `id`: The alarm id that you passed when scheduling the alarm.
+- `params`: The params argument that you passed when scheduling the alarm, if any.
+
+### Example
+
+Setting the alarm:
+
+```dart
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+
+await AndroidAlarmManager.oneShotAt(
+    time,
+    id,
+    callback,
+    alarmClock: true,
+    params: {
+        'param1': 'Hello',
+        'param2': 'World'
+    }
+    ...
+)
+```
+
+To receive this intent in dart, you can use the [receive_intent](https://pub.dev/packages/receive_intent) package:
+
+```dart
+import 'package:receive_intent/receive_intent.dart';
+import 'dart:convert'; // for jsonDecode
+
+final receivedIntent = await ReceiveIntent.getInitialIntent();
+if (receivedIntent.action == "android.intent.action.MAIN"){
+    final paramsExtra = receivedIntent.extra?["params"];
+    if (paramsExtra != null){
+      // The received params is a string, so we need to convert it into a json map
+      final params = jsonDecode(params);
+      // use params
+      // params['param1']
+      // params['param2']
+    }
+    final id = receivedIntent.extra?["id"];
+    // navigate user to alarm with given id
+}
+```
+For more information, check out the receive_intent [getting started](https://pub.dev/packages/receive_intent#getting-started).
+
 ## FAQ
 
 ### Does this plugin support to invoke a method after reboot?
@@ -143,4 +207,3 @@ flutter driver test_driver/android_alarm_manager_plus_e2e.dart
 ## Learn more
 
 - [API Documentation](https://pub.dev/documentation/android_alarm_manager_plus/latest/android_alarm_manager_plus/android_alarm_manager_plus-library.html)
-- [Plugin documentation website](https://plus.fluttercommunity.dev/docs/android_alarm_manager_plus/overview/)

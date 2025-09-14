@@ -1,3 +1,127 @@
+## 12.0.0
+
+> Note: This release has breaking changes.
+>
+> On Android plugin now requires the following:
+> - Android Gradle Plugin >=8.12.1
+> - Gradle wrapper >=8.13
+> - Kotlin 2.2.0
+
+ - **FIX**(share_plus): unable to get the correct result on iOS ([#3660](https://github.com/fluttercommunity/plus_plugins/issues/3660)). ([3bd253b0](https://github.com/fluttercommunity/plus_plugins/commit/3bd253b04021a932fa79412a5da2318c22cfdbe2))
+ - **DOCS**(all): replace MacOS by macOS in package READMEs ([#3658](https://github.com/fluttercommunity/plus_plugins/issues/3658)). ([72b6234c](https://github.com/fluttercommunity/plus_plugins/commit/72b6234c25315c30d8efc9f15a9258b0bb7273a8))
+ - **BREAKING** **FEAT**(share_plus): Change Android compile SDK, update Android build config ([#3671](https://github.com/fluttercommunity/plus_plugins/issues/3671)). ([24363e27](https://github.com/fluttercommunity/plus_plugins/commit/24363e270d3c8219b9516fe57474a448f6c5fd48))
+
+## 11.1.0
+
+ - **FEAT**(share_plus): Added `excludedCupertinoActivities` share parameter ([#3376](https://github.com/fluttercommunity/plus_plugins/issues/3376)). ([f9fdadb4](https://github.com/fluttercommunity/plus_plugins/commit/f9fdadb41242ad2e36ddbf1ade82be6c5bb78ec4))
+ - **DOCS**(all): improve documentation across multiple README files ([#3630](https://github.com/fluttercommunity/plus_plugins/issues/3630)). ([643e12df](https://github.com/fluttercommunity/plus_plugins/commit/643e12dfe0389dc21b49bd31ec03e7f38844d339))
+ - **DOCS**(share-plus): Update README.md. ([2aa9f7e0](https://github.com/fluttercommunity/plus_plugins/commit/2aa9f7e0c7b471dc581d6fbd334633d16eb2da03))
+
+## 11.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(share_plus): SharePlus refactor ([#3404](https://github.com/fluttercommunity/plus_plugins/issues/3404)). ([0a19d460](https://github.com/fluttercommunity/plus_plugins/commit/0a19d46010b6ecf5c2f10771e33a39823f7c30b7))
+
+This version introduces the new `SharePlus` class with the `share(params)` method.
+It replaces the old `Share` class, which has been deprecated but can still be used.
+Check the section "Migrating from `Share` to `SharePlus`" in the `README.md`.
+
+## 10.1.4
+
+ - **FIX**(share_plus): fallback for shareXFiles() to use download on web ([#3388](https://github.com/fluttercommunity/plus_plugins/issues/3388)). ([95a12ee3](https://github.com/fluttercommunity/plus_plugins/commit/95a12ee3982dd61de5d07005de62f81c2e99eb08))
+
+## 10.1.3
+
+ - **REFACTOR**(all): Use range of flutter_lints for broader compatibility ([#3371](https://github.com/fluttercommunity/plus_plugins/issues/3371)). ([8a303add](https://github.com/fluttercommunity/plus_plugins/commit/8a303add3dee1acb8bac5838246490ed8a0fe408))
+ - **FIX**(share_plus): A function declaration without a prototype is deprecated in all versions of C ([#3375](https://github.com/fluttercommunity/plus_plugins/issues/3375)). ([40f9c421](https://github.com/fluttercommunity/plus_plugins/commit/40f9c42138bf1c80e6283f46e12109a0e66c0816))
+ - **FIX**(share_plus): Set correct Flutter and Dart versions requirements ([#3363](https://github.com/fluttercommunity/plus_plugins/issues/3363)). ([65616668](https://github.com/fluttercommunity/plus_plugins/commit/6561666885f547725f6e88ebaae498832b53efed))
+
+## 10.1.2
+
+ - **FIX**(share_plus): Update privacy manifest path ([#3349](https://github.com/fluttercommunity/plus_plugins/issues/3349)). ([d884a991](https://github.com/fluttercommunity/plus_plugins/commit/d884a9917769e11daa66c1aaa3ebd0d015506e77))
+
+## 10.1.1
+
+ - **FIX**(share_plus): [#3322](https://github.com/fluttercommunity/plus_plugins/issues/3322) Downscale previews on iOS to avoid issues with huge images ([#3320](https://github.com/fluttercommunity/plus_plugins/issues/3320)). ([d8c95c2c](https://github.com/fluttercommunity/plus_plugins/commit/d8c95c2cffaf882cf0670cc5daf889eebd249a77))
+
+## 10.1.0
+
+ - **FEAT**(share_plus): Add Swift Package Manager support ([#3169](https://github.com/fluttercommunity/plus_plugins/issues/3169)). ([b3970225](https://github.com/fluttercommunity/plus_plugins/commit/b3970225b80183548ecc5516a5c1a1ad61016860))
+
+## 10.0.3
+
+ - **FIX**(share_plus): `mime` compatible with v2 (v1 still supported) ([#3309](https://github.com/fluttercommunity/plus_plugins/issues/3309)). ([401db75e](https://github.com/fluttercommunity/plus_plugins/commit/401db75efa24c40fd96a05e79d12801f92666efd))
+ - **FIX**(all): Clean up macOS Privacy Manifests ([#3268](https://github.com/fluttercommunity/plus_plugins/issues/3268)). ([d7b98ebd](https://github.com/fluttercommunity/plus_plugins/commit/d7b98ebd7d39b0143931f5cc6e627187576223dc))
+ - **FIX**(all): Add macOS Privacy Manifests ([#3251](https://github.com/fluttercommunity/plus_plugins/issues/3251)). ([bf5dad2a](https://github.com/fluttercommunity/plus_plugins/commit/bf5dad2ad249605055bcbd5f663e42569df12d64))
+
+## 10.0.2
+
+ - **FIX**(share_plus): [#2910](https://github.com/fluttercommunity/plus_plugins/issues/2910) Handle user dismissing dialog on shareUri() in web ([#3175](https://github.com/fluttercommunity/plus_plugins/issues/3175)). ([bba78118](https://github.com/fluttercommunity/plus_plugins/commit/bba781187b4af5682331ed90929c61c13137809a))
+
+## 10.0.1
+
+- **CHORE**(share_plus): Update to package:web to ^1.0.0 ([#3105](https://github.com/fluttercommunity/plus_plugins/pull/3105)). ([1f23910a](https://github.com/fluttercommunity/plus_plugins/commit/1f23910ab50fef2e499054f35cedfd14c578976a))
+
+## 10.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(share_plus): Introduce optional parameter `nameOverride` to `shareXFiles`. ([#3077](https://github.com/fluttercommunity/plus_plugins/issues/3077)). ([f483bce7](https://github.com/fluttercommunity/plus_plugins/commit/f483bce77f50fc03e8c6c969864dd978e46f32da))
+ - **REFACTOR**(all): Remove website files, configs, mentions ([#3018](https://github.com/fluttercommunity/plus_plugins/issues/3018)). ([ecc57146](https://github.com/fluttercommunity/plus_plugins/commit/ecc57146aa8c6b1c9c332169d3cc2205bc4a700f))
+ - **FIX**(all): changed homepage url in pubspec.yaml ([#3099](https://github.com/fluttercommunity/plus_plugins/issues/3099)). ([66613656](https://github.com/fluttercommunity/plus_plugins/commit/66613656a85c176ba2ad337e4d4943d1f4171129))
+ - **DOCS**(share_plus): Update README.md ([#2903](https://github.com/fluttercommunity/plus_plugins/issues/2903)). ([2a547eb3](https://github.com/fluttercommunity/plus_plugins/commit/2a547eb3f0093160279fbc9de21dde3f3ff75c81))
+
+## 9.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **REFACTOR**(share_plus): Share API cleanup ([#2832](https://github.com/fluttercommunity/plus_plugins/issues/2832)). ([fd0511ca](https://github.com/fluttercommunity/plus_plugins/commit/fd0511ca4d55db1e075e72af5a0832b5cfe81244))
+
+## 8.0.3
+
+ - **REFACTOR**(share_plus): Migrate Android example to use the new plugins declaration ([#2742](https://github.com/fluttercommunity/plus_plugins/issues/2742)). ([a73af898](https://github.com/fluttercommunity/plus_plugins/commit/a73af898ee9b73dcc53307186ac4c79e795b1277))
+ - **FIX**(share_plus): Recover ShareSuccessManager state after error ([#2817](https://github.com/fluttercommunity/plus_plugins/issues/2817)). ([2b12d8a8](https://github.com/fluttercommunity/plus_plugins/commit/2b12d8a8ada0d3f00abda0467946bb241361d016))
+ - **DOCS**(share_plus): Add info regarding localization on Apple to README ([#2764](https://github.com/fluttercommunity/plus_plugins/issues/2764)). ([43f9a305](https://github.com/fluttercommunity/plus_plugins/commit/43f9a3051652448868c5031a45276f9ff870a025))
+ - **DOCS**(share_plus): remove typo from the changelog ([#2747](https://github.com/fluttercommunity/plus_plugins/issues/2747)). ([961c8e2d](https://github.com/fluttercommunity/plus_plugins/commit/961c8e2dbf2210947cbed898c90e2776322a0942))
+
+## 8.0.2
+
+> Note: This release has breaking changes.
+
+In this release plugin migrated to package:web, meaning that it now supports WASM!
+
+> Plugin now requires the following:
+> - Flutter >=3.19.0
+> - Dart >=3.3.0
+> - compileSDK 34 for Android part
+> - Java 17 for Android part
+> - Gradle 8.4 for Android part
+
+- **BREAKING** **FEAT**(share_plus): Migrate to package:web ([#2709](https://github.com/fluttercommunity/plus_plugins/issues/2709)). ([641e7905](https://github.com/fluttercommunity/plus_plugins/commit/641e7905b4055827f1481f036415095dc43afe5f))
+- **BREAKING** **BUILD**(share_plus): Target Java 17 on Android ([#2730](https://github.com/fluttercommunity/plus_plugins/issues/2730)). ([e6853a06](https://github.com/fluttercommunity/plus_plugins/commit/e6853a06fa110d69776a85684e302a7c900a6e07))
+- **BREAKING** **BUILD**(sensors_plus): Update to target and compile SDK 34 ([#2712](https://github.com/fluttercommunity/plus_plugins/pull/2712)). ([b752fc3](https://github.com/fluttercommunity/plus_plugins/commit/b752fc3bac2b7ce614faf0fbed010200d99a717b))
+- **FIX**(share_plus): Resolve deprecation warning in Android part ([#2717](https://github.com/fluttercommunity/plus_plugins/issues/2717)). ([5913ac72](https://github.com/fluttercommunity/plus_plugins/commit/5913ac72f6dfcb0f02c371907871805c940a03a8))
+- **FIX**(share_plus): add sharePositionOrigin parameter to shareUri ([#2517](https://github.com/fluttercommunity/plus_plugins/issues/2517)). ([f896d94e](https://github.com/fluttercommunity/plus_plugins/commit/f896d94e6c24551d9dc7d73d8fb05a0f283e0e83))
+- **FIX**(share_plus): Add missing call to result for shareUri on iOS ([#2616](https://github.com/fluttercommunity/plus_plugins/issues/2616)). ([65f23a5d](https://github.com/fluttercommunity/plus_plugins/commit/65f23a5d12ac988d7424a56b1d808f2983e0459f))
+- **FIX**(share_plus): Add iOS Privacy Info ([#2586](https://github.com/fluttercommunity/plus_plugins/issues/2586)). ([17fc2e05](https://github.com/fluttercommunity/plus_plugins/commit/17fc2e058f04168f17f5118bca24b02483af571b))
+- **FIX**(share_plus): Ensure subject is not null before calling putExtra(Intent.EXTRA_SUBJECT, subject) ([#2518](https://github.com/fluttercommunity/plus_plugins/issues/2518)). ([f0bbbefc](https://github.com/fluttercommunity/plus_plugins/commit/f0bbbefc712e01da20e8107e8d25b2005cf7b728))
+- **FEAT**(share_plus): Update min iOS target to 12 ([#2662](https://github.com/fluttercommunity/plus_plugins/issues/2662)). ([5cef2e50](https://github.com/fluttercommunity/plus_plugins/commit/5cef2e500cd10d55b749a6d53ce6e733fdb54d34))
+- **DOCS**(share_plus): Fix supported platforms in README ([#2510](https://github.com/fluttercommunity/plus_plugins/issues/2510)). ([6b4b855b](https://github.com/fluttercommunity/plus_plugins/commit/6b4b855bb6f3c2897e29d0d3ae4a0c0c99ff8c2f))
+
+## 8.0.1
+
+> Note: DO NOT USE THIS RELEASE. It is invalid due to a publishing issue
+
+## 8.0.0
+
+> Note: This release was retracted due to ([#2251](https://github.com/fluttercommunity/plus_plugins/issues/2251)).
+
+## 7.2.2
+
+ - **FIX**(share_plus): Ensure subject is not null before calling putExtra(Intent.EXTRA_SUBJECT, subject) ([#2518](https://github.com/fluttercommunity/plus_plugins/issues/2518)). ([f0bbbefc](https://github.com/fluttercommunity/plus_plugins/commit/f0bbbefc712e01da20e8107e8d25b2005cf7b728))
+ - **DOCS**(share_plus): Fix supported platforms in README ([#2510](https://github.com/fluttercommunity/plus_plugins/issues/2510)). ([6b4b855b](https://github.com/fluttercommunity/plus_plugins/commit/6b4b855bb6f3c2897e29d0d3ae4a0c0c99ff8c2f))
+
 ## 7.2.1
 
  - **CHORE**(share_plus): Update share_plus_platform_interface for compatibility with uuid 4.x

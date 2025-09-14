@@ -1,21 +1,29 @@
 # device_info_plus
 
-[![Flutter Community: device_info_plus](https://fluttercommunity.dev/_github/header/device_info_plus)](https://github.com/fluttercommunity/community)
-
 [![pub package](https://img.shields.io/pub/v/device_info_plus.svg)](https://pub.dev/packages/device_info_plus)
 [![pub points](https://img.shields.io/pub/points/device_info_plus?color=2E8B57&label=pub%20points)](https://pub.dev/packages/device_info_plus/score)
 [![device_info_plus](https://github.com/fluttercommunity/plus_plugins/actions/workflows/device_info_plus.yaml/badge.svg)](https://github.com/fluttercommunity/plus_plugins/actions/workflows/device_info_plus.yaml)
 
-<p class="center">
-<center><a href="https://flutter.dev/docs/development/packages-and-plugins/favorites" target="_blank" rel="noreferrer noopener"><img src="../../../website/static/img/flutter-favorite-badge.png" width="100" alt="build"></a></center>
-</p>
+[<img src="../../../assets/flutter-favorite-badge.png" width="100" />](https://flutter.dev/docs/development/packages-and-plugins/favorites)
+
 Get current device information from within the Flutter application.
 
 ## Platform Support
 
-| Android | iOS | MacOS | Web | Linux | Windows |
+| Android | iOS | macOS | Web | Linux | Windows |
 | :-----: | :-: | :---: | :-: | :---: | :-----: |
 |   ✅    | ✅  |  ✅   | ✅  |  ✅   |   ✅    |
+
+## Requirements
+
+- Flutter >=3.29.0
+- Dart >=3.7.0 <4.0.0
+- iOS >=12.0
+- macOS >=10.14
+- Java 17
+- Kotlin 2.2.0
+- Android Gradle Plugin >=8.12.1
+- Gradle wrapper >=8.13
 
 # Usage
 
@@ -53,12 +61,16 @@ final deviceInfo = await deviceInfoPlugin.deviceInfo;
 final allInfo = deviceInfo.data;
 ```
 
-> **Note**
->
-> To get serial number on Android your app needs to meet one of official [requirements](https://developer.android.com/reference/android/os/Build#getSerial())
-> In case the app doesn't meet any of requirements plugin will return `unknown`.
+### Android
+
+To get serial number on Android your app needs to meet one of official [requirements](https://developer.android.com/reference/android/os/Build#getSerial()).
+In case the app doesn't meet any of requirements plugin will return `unknown`.
+
+### iOS
+
+The `name` property exposes the assigned device name by the owner. This value is obtained from the property `UIDevice.current.name`.
+This property requires special entitlement [com.apple.developer.device-information.user-assigned-device-name](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_device-information_user-assigned-device-name) in iOS 16 and later, otherwise, the property `name` will always be `iPad` or `iPhone`.
 
 ## Learn more
 
 - [API Documentation](https://pub.dev/documentation/device_info_plus/latest/device_info_plus/device_info_plus-library.html)
-- [Plugin documentation website](https://plus.fluttercommunity.dev/docs/device_info_plus/overview)

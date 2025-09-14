@@ -13,7 +13,7 @@ void main() {
 
 /// A sample app for launching intents.
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
 
 /// Holds the different intent widgets.
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({super.key});
 
   void _createAlarm() {
     const intent = AndroidIntent(
@@ -68,6 +68,10 @@ class MyHomePage extends StatelessWidget {
               onPressed: _createAlarm,
               child: const Text(
                   'Tap here to set an alarm\non weekdays at 9:30pm.'),
+            ),
+            ElevatedButton(
+              onPressed: _parseAndLaunch,
+              child: const Text('Tap here to set an alarm\n based on URI'),
             ),
             ElevatedButton(
               onPressed: _openChooser,
@@ -110,6 +114,18 @@ class MyHomePage extends StatelessWidget {
       action: 'com.example.broadcast',
     );
     intent.sendBroadcast();
+  }
+
+  void _parseAndLaunch() {
+    const intent = 'intent:#Intent;'
+        'action=android.intent.action.SET_ALARM;'
+        'B.android.intent.extra.alarm.SKIP_UI=true;'
+        'S.android.intent.extra.alarm.MESSAGE=Create%20a%20Flutter%20app;'
+        'i.android.intent.extra.alarm.MINUTES=30;'
+        'i.android.intent.extra.alarm.HOUR=21;'
+        'end';
+
+    AndroidIntent.parseAndLaunch(intent);
   }
 }
 
@@ -186,6 +202,20 @@ class ExplicitIntentsWidget extends StatelessWidget {
     intent.launch();
   }
 
+  void _getResolvedActivity(BuildContext context) async {
+    final intent = AndroidIntent(
+      action: 'action_view',
+      data: Uri.encodeFull('http://'),
+    );
+
+    final details = await intent.getResolvedActivity();
+    if (details != null && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("${details.appName} - ${details.packageName}")),
+      );
+    }
+  }
+
   void _openGmail() {
     const intent = AndroidIntent(
       action: 'android.intent.action.SEND',
@@ -258,6 +288,13 @@ class ExplicitIntentsWidget extends StatelessWidget {
                 onPressed: _openApplicationDetails,
                 child: const Text(
                   'Tap here to open Application Details',
+                ),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => _getResolvedActivity(context),
+                child: const Text(
+                  'Tap here to get default resolved activity',
                 ),
               ),
               const SizedBox(height: 16),

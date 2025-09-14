@@ -65,8 +65,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text(
+              'Current battery state:',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 8),
             Text(
-              '$_batteryState',
+              '${_batteryState?.name}',
               style: const TextStyle(fontSize: 24),
             ),
             const SizedBox(height: 24),
@@ -74,20 +79,22 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _battery.batteryLevel.then(
                   (batteryLevel) {
-                    showDialog<void>(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        content: Text('Battery: $batteryLevel%'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('OK'),
-                          )
-                        ],
-                      ),
-                    );
+                    if (context.mounted) {
+                      showDialog<void>(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          content: Text('Battery: $batteryLevel%'),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('OK'),
+                            )
+                          ],
+                        ),
+                      );
+                    }
                   },
                 );
               },
@@ -98,27 +105,29 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _battery.isInBatterySaveMode.then(
                   (isInPowerSaveMode) {
-                    showDialog<void>(
-                      context: context,
-                      builder: (_) => AlertDialog(
-                        title: const Text(
-                          'Is in Battery Save mode?',
-                          style: TextStyle(fontSize: 20),
+                    if (context.mounted) {
+                      showDialog<void>(
+                        context: context,
+                        builder: (_) => AlertDialog(
+                          title: const Text(
+                            'Is in Battery Save mode?',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          content: Text(
+                            "$isInPowerSaveMode",
+                            style: const TextStyle(fontSize: 18),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Close'),
+                            )
+                          ],
                         ),
-                        content: Text(
-                          "$isInPowerSaveMode",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Close'),
-                          )
-                        ],
-                      ),
-                    );
+                      );
+                    }
                   },
                 );
               },

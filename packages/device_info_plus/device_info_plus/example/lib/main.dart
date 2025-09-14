@@ -13,15 +13,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runZonedGuarded(() {
-    runApp(const MyApp());
-  }, (dynamic error, dynamic stack) {
-    developer.log("Something went wrong!", error: error, stackTrace: stack);
-  });
+  runZonedGuarded(
+    () {
+      runApp(const MyApp());
+    },
+    (dynamic error, dynamic stack) {
+      developer.log("Something went wrong!", error: error, stackTrace: stack);
+    },
+  );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -45,24 +48,29 @@ class _MyAppState extends State<MyApp> {
         deviceData = _readWebBrowserInfo(await deviceInfoPlugin.webBrowserInfo);
       } else {
         deviceData = switch (defaultTargetPlatform) {
-          TargetPlatform.android =>
-            _readAndroidBuildData(await deviceInfoPlugin.androidInfo),
-          TargetPlatform.iOS =>
-            _readIosDeviceInfo(await deviceInfoPlugin.iosInfo),
-          TargetPlatform.linux =>
-            _readLinuxDeviceInfo(await deviceInfoPlugin.linuxInfo),
-          TargetPlatform.windows =>
-            _readWindowsDeviceInfo(await deviceInfoPlugin.windowsInfo),
-          TargetPlatform.macOS =>
-            _readMacOsDeviceInfo(await deviceInfoPlugin.macOsInfo),
+          TargetPlatform.android => _readAndroidBuildData(
+            await deviceInfoPlugin.androidInfo,
+          ),
+          TargetPlatform.iOS => _readIosDeviceInfo(
+            await deviceInfoPlugin.iosInfo,
+          ),
+          TargetPlatform.linux => _readLinuxDeviceInfo(
+            await deviceInfoPlugin.linuxInfo,
+          ),
+          TargetPlatform.windows => _readWindowsDeviceInfo(
+            await deviceInfoPlugin.windowsInfo,
+          ),
+          TargetPlatform.macOS => _readMacOsDeviceInfo(
+            await deviceInfoPlugin.macOsInfo,
+          ),
           TargetPlatform.fuchsia => <String, dynamic>{
-              'Error:': 'Fuchsia platform isn\'t supported'
-            },
+            'Error:': 'Fuchsia platform isn\'t supported',
+          },
         };
       }
     } on PlatformException {
       deviceData = <String, dynamic>{
-        'Error:': 'Failed to get platform version.'
+        'Error:': 'Failed to get platform version.',
       };
     }
 
@@ -94,22 +102,19 @@ class _MyAppState extends State<MyApp> {
       'manufacturer': build.manufacturer,
       'model': build.model,
       'product': build.product,
+      'name': build.name,
       'supported32BitAbis': build.supported32BitAbis,
       'supported64BitAbis': build.supported64BitAbis,
       'supportedAbis': build.supportedAbis,
       'tags': build.tags,
       'type': build.type,
       'isPhysicalDevice': build.isPhysicalDevice,
+      'freeDiskSize': build.freeDiskSize,
+      'totalDiskSize': build.totalDiskSize,
       'systemFeatures': build.systemFeatures,
-      'displaySizeInches':
-          ((build.displayMetrics.sizeInches * 10).roundToDouble() / 10),
-      'displayWidthPixels': build.displayMetrics.widthPx,
-      'displayWidthInches': build.displayMetrics.widthInches,
-      'displayHeightPixels': build.displayMetrics.heightPx,
-      'displayHeightInches': build.displayMetrics.heightInches,
-      'displayXDpi': build.displayMetrics.xDpi,
-      'displayYDpi': build.displayMetrics.yDpi,
-      'serialNumber': build.serialNumber,
+      'isLowRamDevice': build.isLowRamDevice,
+      'physicalRamSize': build.physicalRamSize,
+      'availableRamSize': build.availableRamSize,
     };
   }
 
@@ -119,9 +124,15 @@ class _MyAppState extends State<MyApp> {
       'systemName': data.systemName,
       'systemVersion': data.systemVersion,
       'model': data.model,
+      'modelName': data.modelName,
       'localizedModel': data.localizedModel,
       'identifierForVendor': data.identifierForVendor,
       'isPhysicalDevice': data.isPhysicalDevice,
+      'isiOSAppOnMac': data.isiOSAppOnMac,
+      'freeDiskSize': data.freeDiskSize,
+      'totalDiskSize': data.totalDiskSize,
+      'physicalRamSize': data.physicalRamSize,
+      'availableRamSize': data.availableRamSize,
       'utsname.sysname:': data.utsname.sysname,
       'utsname.nodename:': data.utsname.nodename,
       'utsname.release:': data.utsname.release,
@@ -148,7 +159,7 @@ class _MyAppState extends State<MyApp> {
 
   Map<String, dynamic> _readWebBrowserInfo(WebBrowserInfo data) {
     return <String, dynamic>{
-      'browserName': describeEnum(data.browserName),
+      'browserName': data.browserName.name,
       'appCodeName': data.appCodeName,
       'appName': data.appName,
       'appVersion': data.appVersion,
@@ -172,6 +183,7 @@ class _MyAppState extends State<MyApp> {
       'hostName': data.hostName,
       'arch': data.arch,
       'model': data.model,
+      'modelName': data.modelName,
       'kernelVersion': data.kernelVersion,
       'majorVersion': data.majorVersion,
       'minorVersion': data.minorVersion,
@@ -222,51 +234,46 @@ class _MyAppState extends State<MyApp> {
         colorSchemeSeed: const Color(0x9f4376f8),
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(_getAppBarTitle()),
-          elevation: 4,
-        ),
+        appBar: AppBar(title: Text(_getAppBarTitle()), elevation: 4),
         body: ListView(
-          children: _deviceData.keys.map(
-            (String property) {
-              return Row(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      property,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
+          children:
+              _deviceData.keys.map((String property) {
+                return Row(
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.all(10),
                       child: Text(
-                        '${_deviceData[property]}',
-                        maxLines: 10,
-                        overflow: TextOverflow.ellipsis,
+                        property,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ).toList(),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Text(
+                          '${_deviceData[property]}',
+                          maxLines: 10,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              }).toList(),
         ),
       ),
     );
   }
 
-  String _getAppBarTitle() => kIsWeb
-      ? 'Web Browser info'
-      : switch (defaultTargetPlatform) {
-          TargetPlatform.android => 'Android Device Info',
-          TargetPlatform.iOS => 'iOS Device Info',
-          TargetPlatform.linux => 'Linux Device Info',
-          TargetPlatform.windows => 'Windows Device Info',
-          TargetPlatform.macOS => 'MacOS Device Info',
-          TargetPlatform.fuchsia => 'Fuchsia Device Info',
-        };
+  String _getAppBarTitle() =>
+      kIsWeb
+          ? 'Web Browser info'
+          : switch (defaultTargetPlatform) {
+            TargetPlatform.android => 'Android Device Info',
+            TargetPlatform.iOS => 'iOS Device Info',
+            TargetPlatform.linux => 'Linux Device Info',
+            TargetPlatform.windows => 'Windows Device Info',
+            TargetPlatform.macOS => 'MacOS Device Info',
+            TargetPlatform.fuchsia => 'Fuchsia Device Info',
+          };
 }

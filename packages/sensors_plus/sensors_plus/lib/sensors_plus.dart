@@ -4,7 +4,8 @@ import 'src/sensors.dart';
 
 export 'package:sensors_plus_platform_interface/sensors_plus_platform_interface.dart';
 
-export 'src/sensors.dart' if (dart.library.html) 'src/sensors_plus_web.dart';
+export 'src/sensors.dart'
+    if (dart.library.js_interop) 'src/sensors_plus_web.dart';
 
 final _sensors = Sensors();
 
@@ -66,4 +67,13 @@ Stream<MagnetometerEvent> magnetometerEventStream({
   Duration samplingPeriod = SensorInterval.normalInterval,
 }) {
   return _sensors.magnetometerEventStream(samplingPeriod: samplingPeriod);
+}
+
+/// Returns a broadcast stream of events from the device barometer at the
+/// given sampling frequency.
+@override
+Stream<BarometerEvent> barometerEventStream({
+  Duration samplingPeriod = SensorInterval.normalInterval,
+}) {
+  return _sensors.barometerEventStream(samplingPeriod: samplingPeriod);
 }
