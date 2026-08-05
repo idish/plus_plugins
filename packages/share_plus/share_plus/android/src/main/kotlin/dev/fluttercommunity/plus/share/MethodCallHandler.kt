@@ -13,21 +13,28 @@ internal class MethodCallHandler(
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         expectMapArguments(call)
 
-        // We don't attempt to return a result if the current API version doesn't support it
-        val isWithResult =
-            Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
-
-        if (isWithResult)
-            manager.setCallback(result)
-
         try {
             when (call.method) {
                 "share" -> {
+                    // We don't attempt to return a result if the current API version doesn't support it
+                    val isWithResult =
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+
+                    if (isWithResult)
+                        manager.setCallback(result)
+
                     share.share(
                         arguments = call.arguments<Map<String, Any>>()!!,
                         withResult = isWithResult,
                     )
                     success(isWithResult, result)
+                }
+                "startActionViewIntent" -> {
+                    val args = call.arguments<Map<String, Any>>()!!
+                    val uriString = args["uriString"] as String
+                    val packageName = args["packageName"] as String
+                    share.startActionViewIntent(uriString, packageName)
+                    result.success(null)
                 }
                 else -> result.notImplemented()
             }

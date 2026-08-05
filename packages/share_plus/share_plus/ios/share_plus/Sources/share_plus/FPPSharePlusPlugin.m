@@ -392,6 +392,34 @@ activityTypesForStrings(NSArray<NSString *> *activityTypeStrings) {
                                    message:@"No share content provided"
                                    details:nil]);
       }
+    } else if ([@"startActionViewIntent" isEqualToString:call.method]) {
+        // 👇 Your custom handler
+        NSDictionary *argsMap = (NSDictionary *) call.arguments;
+        NSString *uriString = argsMap[@"uri"];
+        NSURL *url = [NSURL URLWithString:uriString];
+        if (url == nil) {
+            result([FlutterError errorWithCode:@"error"
+                                       message:@"Invalid URI"
+                                       details:nil]);
+            return;
+        }
+
+        UIApplication *application = [UIApplication sharedApplication];
+        if ([application canOpenURL:url]) {
+            [application openURL:url options:@{} completionHandler:^(BOOL success) {
+                if (success) {
+                    result(nil);
+                } else {
+                    result([FlutterError errorWithCode:@"error"
+                                               message:@"Failed to open URL"
+                                               details:nil]);
+                }
+            }];
+        } else {
+            result([FlutterError errorWithCode:@"error"
+                                       message:@"Cannot open URL"
+                                       details:nil]);
+        }
     } else {
       result(FlutterMethodNotImplemented);
     }

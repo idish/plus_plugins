@@ -101,6 +101,15 @@ class SharePlus {
 
     return _platform.share(params);
   }
+
+  Future<void> startActionViewIntent(
+      String uriString, String packageName) {
+    assert(uriString.isNotEmpty);
+    return _platform.startActionViewIntent(
+      uriString,
+      packageName,
+    );
+  }
 }
 
 @Deprecated('Use SharePlus instead')

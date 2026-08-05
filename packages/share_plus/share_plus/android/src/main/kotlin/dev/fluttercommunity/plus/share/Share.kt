@@ -55,6 +55,15 @@ internal class Share(
         this.activity = activity
     }
 
+
+    fun startActionViewIntent(uriString: String, packageName: String) {
+        val uri = Uri.parse(uriString)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        intent.setPackage(packageName)
+
+        startActivity(intent, false)
+    }
+
     @Throws(IOException::class)
     fun share(arguments: Map<String, Any>, withResult: Boolean) {
         clearShareCacheFolder()
@@ -63,6 +72,7 @@ internal class Share(
         val uri = arguments["uri"] as String?
         val subject = arguments["subject"] as String?
         val title = arguments["title"] as String?
+        val packageName = arguments["packageName"] as String?
         val paths = (arguments["paths"] as List<*>?)?.filterIsInstance<String>()
         val mimeTypes = (arguments["mimeTypes"] as List<*>?)?.filterIsInstance<String>()
         val fileUris = paths?.let { getUrisForPaths(paths) }
@@ -109,6 +119,7 @@ internal class Share(
                 if (!text.isNullOrBlank()) putExtra(Intent.EXTRA_TEXT, text)
                 if (!subject.isNullOrBlank()) putExtra(Intent.EXTRA_SUBJECT, subject)
                 if (!title.isNullOrBlank()) putExtra(Intent.EXTRA_TITLE, title)
+                if (!packageName.isNullOrBlank()) setPackage(packageName)
                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
         }

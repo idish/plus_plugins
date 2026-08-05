@@ -34,6 +34,15 @@ class SharePlatform extends PlatformInterface {
   Future<ShareResult> share(ShareParams params) async {
     return _instance.share(params);
   }
+
+  Future<void> startActionViewIntent(
+      String uriString, String packageName) {
+    assert(uriString.isNotEmpty);
+    return _instance.startActionViewIntent(
+      uriString,
+      packageName,
+    );
+  }
 }
 
 class ShareParams {
@@ -142,6 +151,8 @@ class ShareParams {
   ///   Parameter ignored on other platforms.
   final List<CupertinoActivityType>? excludedCupertinoActivities;
 
+  final String? packageName;
+
   ShareParams({
     this.text,
     this.subject,
@@ -154,6 +165,7 @@ class ShareParams {
     this.downloadFallbackEnabled = true,
     this.mailToFallbackEnabled = true,
     this.excludedCupertinoActivities,
+    this.packageName
   });
 }
 

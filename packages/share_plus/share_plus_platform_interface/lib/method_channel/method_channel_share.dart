@@ -28,6 +28,15 @@ class MethodChannelShare extends SharePlatform {
     return ShareResult(result, _statusFromResult(result));
   }
 
+  @override
+  Future<void> startActionViewIntent(String uriString, String packageName) async {
+    assert(uriString.isNotEmpty);
+    await channel.invokeMethod<void>('startActionViewIntent', {
+      'uriString': uriString,
+      'packageName': packageName,
+    });
+  }
+
   Future<Map<String, dynamic>> _toPlatformMap(ShareParams params) async {
     assert(
       params.text != null ||
@@ -41,6 +50,7 @@ class MethodChannelShare extends SharePlatform {
       if (params.subject != null) 'subject': params.subject,
       if (params.title != null) 'title': params.title,
       if (params.uri != null) 'uri': params.uri.toString(),
+      if (params.packageName != null) 'packageName': params.packageName
     };
 
     if (params.sharePositionOrigin != null) {
