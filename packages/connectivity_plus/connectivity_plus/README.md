@@ -24,11 +24,12 @@ This plugin allows Flutter apps to discover network connectivity types that can 
 
 - Flutter >=3.19.0
 - Dart >=3.3.0 <4.0.0
-- iOS >=12.0
-- macOS >=10.14
+- iOS >=13.0
+- macOS >=10.15
 - Java 17
 - Android Gradle Plugin >=8.12.1
 - Gradle wrapper >=8.13
+- Xcode >= 26.1.1
 
 ## Usage
 
@@ -38,6 +39,11 @@ Sample usage to check currently available connection types:
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
+
+// Determines whether any active network connection exists.
+if (connectivityResult.hasConnectivity) {
+  // Connectivity available (regardless of the underlying transport).
+}
 
 // This condition is for demo purposes only to explain every connection type.
 // Use conditions which work for your requirements.
@@ -56,6 +62,8 @@ if (connectivityResult.contains(ConnectivityResult.mobile)) {
   // It returns [other] on any device (also simulator)
 } else if (connectivityResult.contains(ConnectivityResult.bluetooth)) {
   // Bluetooth connection available.
+} else if (connectivityResult.contains(ConnectivityResult.satellite)) {
+  // Carrier-provided satellite network available
 } else if (connectivityResult.contains(ConnectivityResult.other)) {
   // Connected to a network which is not in the above mentioned networks.
 } else if (connectivityResult.contains(ConnectivityResult.none)) {
@@ -98,9 +106,9 @@ class _MyWidgetState extends State<MyWidget> {
 }
 ```
 
-## Platform Support
+## Supported ConnectivityResult values per platform
 
-The following table shows which `ConnectivityResult` values are supported per platform.
+The following table shows which `ConnectivityResult` values can be returned on every of supported platforms.
 
 |           | Android | iOS | Web | macOS | Windows | Linux |
 |-----------|:-------:|:---:|:---:|:-----:|:-------:|:-----:|
@@ -109,9 +117,9 @@ The following table shows which `ConnectivityResult` values are supported per pl
 | ethernet  | :white_check_mark: | :white_check_mark: |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 | mobile    | :white_check_mark: | :white_check_mark: |                    | :white_check_mark: |                    |                    |
 | vpn       | :white_check_mark: |                    |                    |                    | :white_check_mark: | :white_check_mark: |
+| satellite | :white_check_mark: | :white_check_mark: |                    |                    |                    |                    |
 | other     | :white_check_mark: | :white_check_mark: |                    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-
-_`none` is supported on all platforms by default._
+| none      | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 ### Android
 

@@ -13,34 +13,37 @@ internal class MethodCallHandler(
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
         expectMapArguments(call)
 
-        try {
-            when (call.method) {
-                "share" -> {
-                    // We don't attempt to return a result if the current API version doesn't support it
-                    val isWithResult =
-                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+        when (call.method) {
+            "share" -> {
+                // We don't attempt to return a result if the current API version doesn't support it
+                val isWithResult =
+                    Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
 
-                    if (isWithResult)
-                        manager.setCallback(result)
+                if (isWithResult)
+                    manager.setCallback(result)
 
-                    share.share(
-                        arguments = call.arguments<Map<String, Any>>()!!,
-                        withResult = isWithResult,
+                share.share(
+                    arguments = call.arguments<Map<String, Any>>()!!,
+                    withResult = isWithResult,
+                ) { shareResult ->
+                    // Invoked on the platform thread once the share sheet has been
+                    // launched (success) or preparation failed (failure).
+                    shareResult.fold(
+                        onSuccess = { success(isWithResult, result) },
+                        onFailure = { e ->
+                            manager.clear()
+                            result.error("Share failed", e.message, e)
+                        },
                     )
-                    success(isWithResult, result)
                 }
-                "startActionViewIntent" -> {
-                    val args = call.arguments<Map<String, Any>>()!!
-                    val uriString = args["uriString"] as String
-                    val packageName = args["packageName"] as String
-                    share.startActionViewIntent(uriString, packageName)
-                    result.success(null)
-                }
-                else -> result.notImplemented()
+            "startActionViewIntent" -> {
+                val args = call.arguments<Map<String, Any>>()!!
+                val uriString = args["uriString"] as String
+                val packageName = args["packageName"] as String
+                share.startActionViewIntent(uriString, packageName)
+                result.success(null)
             }
-        } catch (e: Throwable) {
-            manager.clear()
-            result.error("Share failed", e.message, e)
+            else -> result.notImplemented()
         }
     }
 

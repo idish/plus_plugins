@@ -16,20 +16,25 @@ import 'package:uuid/uuid.dart';
 class MethodChannelShare extends SharePlatform {
   /// [MethodChannel] used to communicate with the platform side.
   @visibleForTesting
-  static const MethodChannel channel =
-      MethodChannel('dev.fluttercommunity.plus/share');
+  static const MethodChannel channel = MethodChannel(
+    'dev.fluttercommunity.plus/share',
+  );
 
   @override
   Future<ShareResult> share(ShareParams params) async {
     final paramsMap = await _toPlatformMap(params);
-    final result = await channel.invokeMethod<String>('share', paramsMap) ??
+    final result =
+        await channel.invokeMethod<String>('share', paramsMap) ??
         'dev.fluttercommunity.plus/share/unavailable';
 
     return ShareResult(result, _statusFromResult(result));
   }
 
   @override
-  Future<void> startActionViewIntent(String uriString, String packageName) async {
+  Future<void> startActionViewIntent(
+    String uriString,
+    String packageName,
+  ) async {
     assert(uriString.isNotEmpty);
     await channel.invokeMethod<void>('startActionViewIntent', {
       'uriString': uriString,
@@ -50,7 +55,7 @@ class MethodChannelShare extends SharePlatform {
       if (params.subject != null) 'subject': params.subject,
       if (params.title != null) 'title': params.title,
       if (params.uri != null) 'uri': params.uri.toString(),
-      if (params.packageName != null) 'packageName': params.packageName
+      if (params.packageName != null) 'packageName': params.packageName,
     };
 
     if (params.sharePositionOrigin != null) {
@@ -61,8 +66,10 @@ class MethodChannelShare extends SharePlatform {
     }
 
     if (params.files != null) {
-      final filesWithPath =
-          await _getFiles(params.files!, params.fileNameOverrides);
+      final filesWithPath = await _getFiles(
+        params.files!,
+        params.fileNameOverrides,
+      );
       assert(filesWithPath.every((element) => element.path.isNotEmpty));
 
       final mimeTypes = filesWithPath
@@ -79,8 +86,9 @@ class MethodChannelShare extends SharePlatform {
 
     if (params.excludedCupertinoActivities != null &&
         params.excludedCupertinoActivities!.isNotEmpty) {
-      final excludedActivityTypes =
-          params.excludedCupertinoActivities!.map((e) => e.value).toList();
+      final excludedActivityTypes = params.excludedCupertinoActivities!
+          .map((e) => e.value)
+          .toList();
       map['excludedCupertinoActivities'] = excludedActivityTypes;
     }
 
@@ -124,7 +132,8 @@ class MethodChannelShare extends SharePlatform {
 
       //Per Issue [#3032](https://github.com/fluttercommunity/plus_plugins/issues/3032): use overridden name when available.
       //Per Issue [#1548](https://github.com/fluttercommunity/plus_plugins/issues/1548): attempt to use XFile.name when available
-      final filename = nameOverride ??
+      final filename =
+          nameOverride ??
           (filenameNotEmptyOrHasValidExt
               ? file.name
               : "${const Uuid().v1().substring(10)}.$extension");
@@ -148,7 +157,7 @@ class MethodChannelShare extends SharePlatform {
         _getFile(
           files[index],
           nameOverride: fileNameOverrides?.elementAt(index),
-        )
+        ),
     ]);
   }
 

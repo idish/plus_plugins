@@ -35,13 +35,9 @@ class SharePlatform extends PlatformInterface {
     return _instance.share(params);
   }
 
-  Future<void> startActionViewIntent(
-      String uriString, String packageName) {
+  Future<void> startActionViewIntent(String uriString, String packageName) {
     assert(uriString.isNotEmpty);
-    return _instance.startActionViewIntent(
-      uriString,
-      packageName,
-    );
+    return _instance.startActionViewIntent(uriString, packageName);
   }
 }
 
@@ -85,8 +81,11 @@ class ShareParams {
   final XFile? previewThumbnail;
 
   /// The optional [sharePositionOrigin] parameter can be used to specify a global
-  /// origin rect for the share sheet to popover from on iPads and Macs. It has no effect
-  /// on other devices.
+  /// origin rect to anchor the share sheet to a widget user interacts with on iPads and Macs.
+  /// It has no effect on other devices.
+  ///
+  /// If this parameter not provided on iPads the popover anchors to the center of the screen
+  /// instead of throwing. Providing an accurate rect is still recommended for better UX.
   ///
   /// * Supported platforms: iPad and Mac
   ///   Parameter ignored on other platforms.
@@ -165,7 +164,7 @@ class ShareParams {
     this.downloadFallbackEnabled = true,
     this.mailToFallbackEnabled = true,
     this.excludedCupertinoActivities,
-    this.packageName
+    this.packageName,
   });
 }
 
