@@ -36,6 +36,7 @@ internal class MethodCallHandler(
                         },
                     )
                 }
+            }
             "startActionViewIntent" -> {
                 val args = call.arguments<Map<String, Any>>()!!
                 val uriString = args["uriString"] as String
